@@ -1,0 +1,720 @@
+
+
+
+
+\section{Classical field theory}
+
+
+\todo[]{integrate onl and new notes}
+
+\subsection{Old notes}
+
+
+A field in the sense of classical field theory is a function which takes in a point in space time, $x \in \mathcal{M}$, an returns a value in some space $X$, for example scalars ($X = \mathbb{R}$), spinors or vectors.
+Let the set of all fields $\psi_\alpha(x) \in X$ in consideration be $C(X)$.
+The dynamics of these fields are given by the Lagrangian density $\mathcal{L}$.
+The Lagrangian density might be tough of in two ways.
+Firstly as a functional which takes in a field and returns a scalar field
+\begin{align*}
+    \mathcal{L}: \, C(X) &\longrightarrow C(\mathbb{R})\\
+    \psi_\alpha(x) & \longrightarrow \mathcal{L}[\psi_\alpha](x)
+\end{align*}
+The action is then defined as the integral of the Lagrangian over some part of space time $\Omega \subseteq \mathcal{M}$:
+\begin{equation*}
+    S[\psi_\alpha] = \int_\Omega \dd x \, \mathcal{L}[\psi_\alpha](x).
+\end{equation*}
+The second way is as a scalar function of the value of the field, its derivatives and possibly space time itself: $\mathcal{L}(\varphi_\alpha, \partial_\mu \varphi_\alpha, ..., x)$.
+This second form is how the Lagrangian of a specific theory is defined, for example
+\begin{equation*}
+    \mathcal{L}_{KG} = \frac{1}{2}(\partial \varphi)^2 - \frac{1}{2} m \varphi^2, \quad \mathcal{L}_{D} = \bar \psi (i \slashed \partial - m) \psi.
+\end{equation*}
+If we have a smooth one-parameter family of transformation of the field
+\begin{equation*}
+    \psi_\alpha(x) \longrightarrow \psi'_\alpha(x; t), \quad t \in \mathbb{R}, \, \psi'_\alpha(x; 0) = \psi_\alpha(x),
+\end{equation*}
+This becomes, for $\epsilon \ll 1$
+\begin{equation*}
+    \psi_\alpha(x) \longrightarrow \psi'_\alpha(x; \varepsilon) \sim \psi_\alpha(x) + \varepsilon f_\alpha[\psi](x) = \psi_\alpha(x) + \delta \psi_\alpha(x).
+\end{equation*}
+The dynamical equations of the field, the Euler-Lagrange equations, are obtained using an arbitrary transformation of the fields
+\begin{equation*}
+    \psi_\alpha(x) \longrightarrow \psi_\alpha(x) + \varepsilon \eta(x), \quad \eta(\partial\Omega) = 0,
+\end{equation*}
+and demand that the action is stationary:
+\begin{equation*}
+    \delta S[\psi] = \lim_{\varepsilon \rightarrow 0} \frac{1}{\varepsilon} \left(S[\psi_\alpha] - S[\psi'_\alpha(\varepsilon)]\right) = \lim_{\varepsilon \rightarrow 0} \frac{1}{\varepsilon} \left(\int_\Omega \dd x \, (\mathcal{L}[\psi_\alpha](x) - \mathcal{L}[\psi'_\alpha(\varepsilon)](x)\right)
+\end{equation*}
+We then use the fact that $\mathcal{L}$ may be viewed as a smooth function of the field and its derivatives, $\Ell(\psi'_\alpha, \partial_\mu \psi'_\alpha) \sim \Ell(\psi_\alpha + \epsilon \eta_\alpha, \partial_\mu (\psi_\alpha + \varepsilon \eta_\alpha))$ to Taylor expand it. Furthermore, the fact that the variation $\eta$ vanish at the boundaries may be used to do partial integration, meaning
+\begin{equation*}
+    \delta S[\psi] = \lim_{\varepsilon \rightarrow 0} \frac{1}{\varepsilon} \int_\Omega \dd x \,\left( \pdv{\Ell}{\psi_\alpha} \epsilon \eta_\alpha(x)  + \pdv{\Ell}{(\partial_\mu\psi_\alpha)} \epsilon \partial_\mu \eta_\alpha(x)  \right) = \int_\Omega \dd x \,\left( \pdv{\Ell}{\psi_\alpha} - \dd_\mu \left(\pdv{\Ell}{(\partial_\mu\psi_\alpha)} \right)\right)\eta_\alpha(x) = 0
+\end{equation*}
+here, $\dd_\mu$ is used to remind us that we must consider the derivative of the Lagrangian as a scalar field $\pdv*{\Ell}{(\partial_\mu\psi_\alpha)}[\psi](x)$ in the same way as the Lagrangian, and thus take a total derivative w.r.t. $x^\mu$.
+As $\eta_\alpha$ is arbitrary, this implies 
+\begin{equation*}
+    \pdv{\Ell}{\psi_\alpha} - \dd_\mu \left(\pdv{\Ell}{(\partial_\mu\psi_\alpha)} \right) = 0.
+\end{equation*}
+
+\subsection*{Nöthers theorem}
+If a transformation leaves the Lagrangian unchanged modulo a divergence, i.e. $\Ell[\psi'](x) = \Ell[\psi](x) + \dd_\mu K^\mu[\psi](x)$, then the one may use the divergence theorem to show that
+\begin{equation*}
+    \Delta S = \int_\Omega \dd x \, \partial_\mu K^\mu = \int_{\partial \Omega} \dd x \,n_\mu K^\mu,
+\end{equation*}
+where $n^\mu$ is the surface normal of $\Omega$. \footnote{Uppercase delta is used here to distiguish it from the variation we used to obtain the EL equations.} 
+If we repeat the procedure to obtain the EL-equations, this part of the action will not contribute, as the variation on the boundary is assumed to be zero,
+and the equations of motion is unchanged.
+This is therefore called a (continuous) symmetry of the Lagrangian.
+Assuming the transformation is of the form as before, $\psi'_\alpha \sim \psi_\alpha + \eps f_\alpha[\psi]$, we may use the second form of the Lagrangian to write
+\begin{equation*}
+    \delta \Ell = \eps \pdv{\Ell}{\psi_\alpha} f_\alpha[\psi] + \pdv{\Ell}{(\partial_\mu \psi_\alpha)} \eps \dd_\mu f_\alpha[\psi] = \eps \dd_\mu K^\mu[\psi] \eps.
+\end{equation*}
+Using the EL-equations, this gives us a conserved current
+\begin{equation*}
+    J^\mu[\psi] = \pdv{\Ell}{(\partial_\mu \psi_\alpha)} f_\alpha[\psi] - K^\mu[\psi], \quad \dd_\mu J^\mu[\psi] = 0. 
+\end{equation*}
+Using translation, $\psi_\alpha'(x) = \psi(x - \eps \xi) \sim \psi_\alpha - \eps \xi^\mu\partial_\mu \psi_\alpha(x)$, we get $f_\alpha[\psi] = \xi^\mu\partial_\mu \psi_\alpha(x)$.
+As the Lagrangian is a scalar, we also get $\Ell[\psi'](x) = \Ell[\psi](x - \eps \xi) = \Ell[\psi] - \eps \xi^\mu \partial_\mu \Ell[\psi](x)$.
+As the translation vector is arbitrary, we get the canonical stress-energy tensor
+\begin{equation*}
+    \Theta^\mu{}_\nu = \pdv{\Ell}{(\partial_\mu \psi_a)} \partial_\nu \psi_\alpha - \delta^\mu_\nu \Ell.
+\end{equation*}
+
+
+
+\subsection*{Functional derivative}
+
+
+Functional differentiation generalizes the property
+\begin{equation*}
+    \dd F(x) = \sum_i \pdv{F}{x_i}\dd x_i
+\end{equation*}
+We have $S[\phi]$, so we get, and define the variation of $S$ by an arbitrary $\eta(x)$, as in the derivation of the EL-equations:
+\begin{equation*}
+    \delta {S[\psi_\alpha]} =\lim_{\varepsilon \rightarrow 0} \frac{1}{\varepsilon} \left(S[\psi_\alpha] - S[\psi'_\alpha(\varepsilon)]\right) =: \int_\Omega \dd x \, \fdv{S}{\psi_\beta(x)} \delta \psi_\beta(x)
+\end{equation*}
+The EL-equations are thus given by $\fdv{S[\psi]}{\psi_\alpha(x)} = 0$.
+We may, as in classical mechanics, introduce a canonical momentum and Hamiltonian density. Let $\partial_0 f = \dot f$, and $\bar \partial_\mu = (0, \partial_1, ...)$. Then
+\begin{equation*}
+    \pi_\alpha = \pdv{\Ell}{(\dot \psi_\alpha)}, \quad \He[\psi, \pi] = \He(\psi, \hat \partial \psi, \pi) = \pi_\alpha \dot \psi_\alpha - \Ell[\psi]. 
+\end{equation*}
+The equations of motion are given by Hamiltons equation,
+\begin{equation*}
+    \dot \psi_\alpha = \{\pi_\alpha, \He \}, \quad \dot \pi_\alpha = \{\psi_\alpha, \He \}.
+\end{equation*}
+We have here introduced the Poisson brackets, 
+\begin{equation*}
+    \{A, B\} = \int \dd y \int \dd x \left( \fdv{A}{\psi_\alpha(x)} \fdv{B}{\pi_\alpha(y)} - \fdv{B}{\psi_\alpha(y)} \fdv{A}{\pi_\alpha(x)} \right).
+\end{equation*}
+
+
+
+\subsection*{Field theory on curved manifolds}
+
+
+A action on curved manifold may defined as with the metric $g_{\mu \nu}$, for a scalar $\Ell$
+\begin{equation*}
+    S[\psi_\alpha] = \int_\Omega \dd^nx \, \sqrt{g}\Ell[\psi_\alpha] 
+\end{equation*}
+When the metric is the free field, i.e. $\psi_\alpha = g_{\mu \nu}$, one needs to vary with respect to $\sqrt{g} = \sqrt{\det(g)}$. We then get, for arbitrary $\eta(x)_{\mu \nu}$
+\begin{align*}
+    \delta \sqrt{g} &
+    = \lim_{\eps \rightarrow 0 } \sqrt{\det(g^{\mu \nu} + \eps \eta^{\mu \nu})} - \sqrt{g} 
+    = \frac{1}{2}\sqrt{g} \delta \ln(g) \\
+    \delta \ln(g) &
+    = \lim_{\eps \rightarrow 0 } \ln(\det(g_{\mu \rho} [g^\rho{}_\nu - \varepsilon g^{\rho\sigma} \eta_{\sigma \nu}])) - \ln(g)
+    = \lim_{\eps \rightarrow 0 } \ln(\det(g^\rho{}_\nu - \varepsilon g^{\rho\sigma} \eta_{\sigma \nu})) \\
+    \det(g + \varepsilon M) &
+    = \frac{1}{n!}\eps^{\mu_1...}\eps_{\nu_1...}(g + \varepsilon M)^{\nu_1}{}_{\mu_1} ... 
+    = \frac{1}{n!}\eps^{\mu_1...}\eps_{\nu_1...} (g^{\nu_1}{}_{\mu_1} ... + \eps M^{\nu_1}{}_{\mu_1}  g^{\nu_2}{}_{\mu_2}...  + ...)\\
+   & = 1 + \frac{1}{n!} \eps \epsilon^{\mu \mu_2...} \epsilon_{\nu \mu_2...} M^\nu{}_\mu  + \mathcal{O}(\eps^2)
+   = 1 + \eps M^{\mu}{}_{\mu}  + \mathcal{O}(\eps^2)
+   \end{align*}
+   Using $\ln(1 + \eps x) \sim x$, and $\delta( g^{\mu\nu} g_{\mu\nu}) = 0$,
+   \begin{align*}
+   \delta \sqrt{g} =  -\frac{1}{2} \sqrt{g} g_{\mu \nu} \delta g^{\mu \nu}.
+\end{align*}
+Furthermore, as $\delta \Gamma = \Gamma - \Gamma'$, it is a tensor, and we may write
+\begin{align*}
+    \delta R^\rho{}_{\sigma \mu \nu} 
+    & = \delta(\partial_{[\mu} \Gamma^\rho_{\nu] \sigma} + \Gamma^\rho_{\lambda [\mu} \Gamma^\lambda_{\nu] \sigma})
+    = \partial_{[\mu} \delta \Gamma^\rho_{\nu] \sigma} + (\delta \Gamma^\rho_{\lambda [\mu}) \Gamma^\lambda_{\nu] \sigma} + \Gamma^\rho_{\lambda [\mu}(\delta \Gamma^\lambda_{\nu] \sigma}) \\
+    & = \partial_{\mu} \delta \Gamma^\rho_{\nu \sigma}  + \Gamma^\rho_{\lambda \mu}(\delta \Gamma^\lambda_{\nu \sigma}) - \Gamma^\lambda_{\mu \sigma}   (\delta \Gamma^\rho_{\lambda \nu}) - \left( \partial_{\nu} \delta \Gamma^\rho_{\mu \sigma}  + \Gamma^\rho_{\lambda \nu}(\delta \Gamma^\lambda_{\mu \sigma}) - \Gamma^\lambda_{\nu \sigma}   (\delta \Gamma^\rho_{\lambda \mu}) \right) + (\Gamma^{\lambda}_{\mu\nu}\delta\Gamma^\rho_{\lambda \sigma} - \Gamma^{\lambda}_{\mu\nu}\delta\Gamma^\rho_{\lambda \sigma}) \\
+    & = \nabla_{\mu}\delta \Gamma^\rho_{\nu \sigma} - \nabla_{\nu}\delta \Gamma^\rho_{\mu \sigma}
+     = \nabla_\eta \left(g^\eta{}_{\mu} \delta\Gamma^\rho_{\nu \sigma} - g^\eta{}_{\nu} \delta\Gamma^\rho_{\mu \sigma} \right) 
+    = \nabla_\eta (K^\rho{}_{\sigma \mu \nu})^\eta,
+\end{align*}
+where $K$ is a tensorial quantity, which vanish at the boundary of our spacetime.
+
+
+
+
+
+\subsection{Functionals --- from master}
+\label{appendix: Functional derivatives}
+
+
+The principle of stationary action and the path integral method relies on functional calculus, where ordinary, $n$-dimensional calculus is generalized to an infinite-dimensional calculus on a space of functions.
+A functional, $S$, takes in a function $\varphi(x)$, and returns a real number $S[\varphi]$.
+We will be often be dealing with functionals of the form
+%
+\begin{equation}
+    \label{general action functional}
+    S[\varphi] = \int_\Em \dd^n x \, \Ell[\varphi](x),
+\end{equation}
+%
+Here, $\Ell[\varphi](x)$, the Lagrangian density, is a functional which takes in a function $\varphi$, and returns a real number $\Ell[\varphi](x)$ \emph{for each point} $x \in \Em$.
+$\Ell$ thus returns a real-valued function, not just a number.
+$\Em$ is the manifold, in our case space-time, of which both $\varphi(x)$ and $\Ell[\varphi](x)$ are functions.
+The function $\varphi$ can, in general, take on the value of a scalar, complex number, spinor, vector, etc\dots, while $\Ell[\varphi](x)$ must be a scalar-valued function.
+This strongly constraints the form of any Lagrangian and is an essential tool in constructing quantum field theories.
+Although this section is written with a single scalar-valued function $\varphi$, this can easily be generalized by adding an index, $\varphi \rightarrow \varphi_\alpha$, enumerating all the degrees of freedom, then summing over this index when restating the arguments~\autocite{carrollSpacetimeGeometryIntroduction2019,schwartzQuantumFieldTheory2013,peskinIntroductionQuantumField1995}.
+
+
+
+\subsection{Functional derivative}
+
+The functional derivative is base on an arbitrary \emph{variation} $\eta$ of the function $\varphi$.
+The variation $\eta$, often written $\delta \varphi$, is an arbitrary function only constrained to vanish \emph{quickly enough} at the boundary $\partial \Em$.\footnote{%
+The condition of ``quickly enough'' is to ensure that we can integrate by parts and ignore the boundary condition, which we will do without remorse.
+}
+The variation of the functional $S$ is defined as
+%
+\begin{equation}
+    \delta_\eta S[\varphi] = \lim_{\epsilon \rightarrow 0} \frac{1}{\epsilon}
+    \left( S[\varphi + \epsilon \eta] - S[\varphi] \right) 
+    = \odv{}{\epsilon} S[\varphi + \epsilon \eta] |_{\epsilon = 0}.
+\end{equation}
+%
+We can regard the variation of a functional as the generalization of the differential of a function, \autoref{covectors i.e. one forms}, as the best linear approximation around a point.
+In regular differential geometry, a function $f$ can be approximated around a point $x$ by
+%
+\begin{equation}
+    f(x + \epsilon v) = f(x) + \epsilon \dd f(v),
+\end{equation}
+%
+where $v$ is a vector in the tangent space at $x$.
+In functional calculus, the functional $S$ is analogous to $f$, $\varphi$ to $x$, and $\eta$ to $v$.
+We can more clearly see the resemblance by writing
+%
+\begin{equation}
+    \odv{}{\epsilon} f(x + \epsilon v) = \dd f(v) = \pdv{f}{x^\mu} v^\mu.
+\end{equation}
+%
+In the last line we expanded the differential using the basis-representation, $v = v^\mu\partial_\mu$.
+To generalize this to functional, we define the \emph{functional derivative}, by
+%
+\begin{equation}
+    \label{definition functional derivative}
+    \delta_\eta S[\varphi] = \int_\Em \dd^n x \, \fdv{S[\varphi]}{\eta(x)} \eta(x).
+\end{equation}
+%
+If we let $S[\varphi] = \varphi(x)$, for some fixed $x$, the variation becomes
+%
+\begin{equation}
+    \delta_\eta S [\varphi] = \eta(x) = \int \dd^n y \, \delta(x - y) \eta(y),
+\end{equation}
+%
+which leads to the identity
+%
+\begin{equation}
+    \fdv{\varphi(x)}{\varphi(y)} = \delta(x - y).
+\end{equation}
+%
+There is also a generalized chain rule for functional derivatives.
+If $\psi$ is some new functional variable, then
+%
+\begin{equation}
+    \fdv{S[\varphi]}{\varphi(x)}
+    = \int_\Em \dd^n y \, 
+    \fdv{S[\varphi]}{\psi(y)}
+    \fdv{\psi(y)}{\varphi(x)}.
+\end{equation}
+%
+Higher functional derivatives are defined in terms of higher-order variations,
+%
+\begin{equation}
+    \delta^m_\eta S[\varphi]
+    = \odv{}{\epsilon} \delta^{m-1}_\eta S[\varphi + \epsilon \eta]|_{\epsilon=0}
+    = \int_\Em 
+    \left(\prod_{i=1}^m \dd^n x_i \, \eta(x_i)\right) 
+    \frac{\delta^m S[\varphi]}{\delta \varphi(x_1)...\delta\varphi(x_m)}.
+\end{equation}
+%
+With this, we can write the functional Taylor expansion,
+%
+\begin{equation}
+    S[\varphi_0 + \varphi]
+    = S[\varphi_0]
+    + \int_\Em \dd^n x \, \varphi(x) \fdv{S[\varphi_0]}{\varphi(x)}
+    + \frac{1}{2} \int_\Em \dd^n x \dd^n y \, \varphi(x) \varphi(y) \fdv{S[\varphi_0]}{\varphi(x), \varphi(y)}
+    +\dots.
+\end{equation}
+%
+Here, the notation $\fdv{S[\varphi_0]}{\varphi}$ indicate that $S[\varphi]$ is first differentiated with respect to $\varphi$, then evaluated at $\varphi = \varphi_0$~\autocite{peskinIntroductionQuantumField1995,schwartzQuantumFieldTheory2013}.
+
+
+
+\subsection{Gaussian integrals and the stationary phase approximation}
+
+\label{section:gaussian integrals}
+
+\begin{figure}[!htb]
+    \centering
+    \begin{tikzpicture}
+        \draw (-2, 0) -- (2, 0) node[right] {$\mathrm{Re}(x)$};
+        \draw (0, -2) -- (0, 2) node[above] {$\mathrm{Im}(x)$};
+        \draw[->, thick] (-1.75, 0.1) -- (1.8, 0.1);
+        \draw[->, thick] (1.8, 0.15) arc (10:45:1.8);
+        \draw[->, thick] ({1.8/sqrt(2)}, {1.8/sqrt(2)}) -- ({-1.8/sqrt(2)}, {-1.8/sqrt(2)});
+        \draw[->, thick] ({-1.8/sqrt(2)}, {-1.8/sqrt(2)}) arc (225:180:1.8);
+    \end{tikzpicture}
+    \caption{Wick rotation}
+    \label{Wick rotation}
+\end{figure}
+
+
+An integral that we will use a lot is the Gaussian integral,
+%
+\begin{equation}
+    \int_\R \dd x \, \exp{- \frac{1}{2} a x^2} = \sqrt{\frac{2 \pi}{a}},
+\end{equation}
+%
+for $a \in \R$. The imaginary version,
+%
+\begin{equation}
+    \int_R \dd x \, \exp{i \frac{1}{2} a x^2 }
+\end{equation}
+%
+does not converge. However, if we change $a \rightarrow a + i\epsilon$, the integrand is exponentially suppressed.
+%
+\begin{equation}
+    f(x) = \exp{i \frac{1}{2}a x^2} \rightarrow
+    \exp{i\frac{1}{2}a x^2 - \frac{1}{2} \epsilon  x^2}.
+\end{equation}
+%
+As the integrand falls exponentially for $x\rightarrow \infty$ and contains no poles in the upper right nor lower left quarter of the complex plane, we may perform a wick rotation by closing the contour as shown in \autoref{Wick rotation}.
+This gives the result
+%
+\begin{align}
+    \label{complex gauss 1D}
+    \nonumber
+    \int_\R \dd x \, \exp{i \frac{1}{2}(a + i\epsilon) x^2}
+    & = \int_{\sqrt{i}\R} \dd x \, \exp{i\frac{1}{2} ax^2} 
+    \\ \nonumber &
+    = \sqrt{i} \int_\R \dd y\, \exp{-\frac{1}{2} (-a) y^2}
+    \\ &
+    = \sqrt{\frac{2 \pi i}{(-a)}},
+\end{align}
+%
+where we have made the change of variable $y = (1+i)/\sqrt{2} x = \sqrt{i} x$.
+In $n$ dimensions, the Gaussian integral formula generalizes to
+%
+\begin{equation}
+    \int_{\R^n} \dd^n x \, \exp{-\frac{1}{2} x_n A_{nm} x_m } 
+    =\sqrt{\frac{(2 \pi)^n}{\det(A)}},
+\end{equation}
+%
+where $A$ is a matrix with $n$ real, positive eigenvalues.
+We may also generalize \autoref{complex gauss 1D},
+%
+\begin{align}
+    \int_{\R^n} \dd^n x \, \exp{i\frac{1}{2} x_n( A_{nm} + i \epsilon \delta_{nm}) x_m } =\sqrt{\frac{(2 \pi i )^n}{\det(-A)}}.
+\end{align}
+%
+The final generalization is to functional integrals.
+If $A(x, x')$ is a linear operator, then
+%
+\begin{align}
+    \nonumber
+    \int \D \varphi \, \exp{- \frac{1}{2} \int \dd x \dd x' \, \varphi(x) A(x, x') \varphi(x') }
+    &= C \det(A)^{-1/2} ,\\
+    \int \D \varphi \, \exp{i\frac{1}{2} \int \dd x \dd x'\, \varphi(x) A(x, x') \varphi(x') }
+    &= C' \det(-A)^{-1/2}.
+\end{align}
+%
+$C$ and $C'$ are divergent constants but will either fall away as we are only looking at the logarithm of $I_\infty$ and can throw away additive constants, or ratios between quantities that are both multiplied by $C$ or $C*$.
+
+The Gaussian integral can be used for the stationary phase approximation.
+By Taylor expanding around a stationary point $x_0$, we may approximate 
+%
+\begin{equation}
+    \int \dd x \, \exp{i \alpha f(x)} 
+    \sim \sqrt{\frac{2 \pi }{\alpha f''(x_0)}}\exp{ \alpha f(x_0)}, 
+    \quad \alpha\rightarrow \infty,
+\end{equation}
+%
+where the point $x_0$ is defined by $ f'(x_0) = 0$. 
+The functional generalization of this is
+%
+\begin{equation}
+    \int \D \varphi \, \exp{i \alpha S[\varphi]}
+    \sim
+    C \det\left(
+        - \frac{1}{\alpha} \frac{\delta^2 S[\varphi_0]}{\delta \varphi^2}
+        \right)^{-1/2}
+    \exp{i \alpha S[\varphi_0]  },
+\end{equation}
+%
+Here, $S[\varphi]$ is a general functional of $\varphi$, we have used the Taylor expansion, and $\varphi_0$ obeys
+%
+\begin{equation}
+    \fdv{S[\varphi_0]} {\varphi(x)}= 0.
+\end{equation}
+%
+
+
+
+
+
+\subsection{The Euler-Lagrange equation}
+
+The Lagrangian may also be written as a scalar function of the field-values at $x$, $\varphi(x)$, as well as its derivatives, $\partial_\mu \varphi(x)$, for example
+%
+\begin{equation}
+    \Ell(\varphi, \partial_\mu \varphi) = \frac{1}{2} \partial_\mu \varphi \partial^\mu\varphi - \frac{1}{2} m^2 \varphi^2 - \frac{1}{4!}\lambda \varphi^4+ \dots.
+\end{equation}
+%
+We have omitted the evaluation at $x$ for the brevity of notation.
+We use this to evaluate the variation of a functional in the of \autoref{general action functional}, 
+%
+\begin{equation}
+    \label{variation of action}
+    \delta_\eta S[\varphi] = \odv{}{\epsilon}
+    \int_\Em \dd^n x \, \Ell[\varphi + \epsilon \eta](x),
+\end{equation}
+%
+by Taylor expanding the Lagrangian density as a function of $\varphi$ and its derivatives,
+%
+\begin{equation}
+    \Ell[\varphi + \epsilon \eta]
+    = \Ell
+    \left(
+        \varphi + \epsilon \eta, \partial_\mu\{\varphi + \epsilon \eta\}
+    \right)
+     = 
+    \Ell[\varphi]
+    +
+    \epsilon
+    \left(
+        \pdv{\Ell}{\varphi} \eta 
+        + \pdv{\Ell}{(\partial_\mu \varphi)}\partial_\mu\eta 
+    \right) + \Oh(\epsilon^2).
+\end{equation}
+%
+Inserting this into \autoref{variation of action} and partially integrating the last term allows us to write the variation on the form \autoref{definition functional derivative}.
+The functional derivative is
+%
+\begin{equation}
+    \fdv{S}{\varphi} = \pdv{\Ell}{\varphi} - \partial_\mu \pdv{\Ell}{(\partial_\mu \varphi)}.
+\end{equation}
+%
+The principle of stationary action says that the equation of motion of a field obeys $\delta_\eta S = 0$.
+As $\eta$ is arbitrary, this is equivalent to setting the functional derivative of $S$ equal to zero.
+The result is the Euler-Lagrange equations of motion~\autocite{schwartzQuantumFieldTheory2013},
+%
+\begin{equation}
+    \pdv{\Ell}{\varphi} 
+    -
+    \partial_\mu \pdv{\Ell}{(\partial_\mu \varphi)}
+    = 0.
+\end{equation}
+
+
+
+
+\subsection{Functional calculus on a curved manifold}
+\label{subsection: functional calculus on a curved manifold}
+
+As discussed in \autoref{subsection: integration on manifolds}, when integrating a scalar on a curved manifold, we must include the $\sqrt{|g|}$-factor to get a coordinate-independent result.
+The action in curved spacetime is therefore
+%
+\begin{equation}
+    S[g, \varphi] = \int_\Em \dd^n x \, \sqrt{|g|} \Ell[g, \varphi],
+\end{equation}
+%
+where the action and the Lagrangian now is a functional of both the matter-field $\varphi$ and the metric $g_{\mu \nu}$.
+Our example Lagrangian from last section now takes the form
+\begin{equation}
+    \label{Lagrangian curved spacetime}
+    \Ell(g_{\mu \nu}, \varphi, \nabla_\mu \varphi) = \frac{1}{2} g^{\mu \nu} \nabla_\mu \varphi \nabla_\nu \varphi - \frac{1}{2}m^2 \varphi^2 - \frac{1}{4!}\lambda \varphi^4 \dots,
+\end{equation}
+%
+where partial derivatives are substituted with covariant derivatives following the minimal coupling rule.
+We define the functional derivative as
+%
+\begin{equation}
+    \delta_\eta S = \int_\Em \dd^n x \sqrt{|g|} \fdv{S}{\eta(x)} \eta(x).
+\end{equation}
+%
+If this is a variation in $\varphi$ only, this gives the same result as before.
+However, in general relativity, the metric itself is a dynamic field, and we may therefore vary it.
+Consider $g_{\mu \nu} \rightarrow g_{\mu \nu} + \delta g_{\mu \nu}$.
+The variation of the action is then
+assuming $\Ell$ only depends on $g$ and not its derivatives, we get
+%
+\begin{equation}
+    \label{result derivation of einstein field equation}
+    \delta_{g} S = \int_\Em \dd^n x \, 
+    \left[
+        \left(\delta \sqrt{|g|}\right) \Ell[g] + \sqrt{|g|} \delta \Ell[g]
+    \right]
+\end{equation}
+%
+The variation of the $\sqrt{|g|}$-factor can be evaluated using the Levi-Civita symbol $\varepsilon_{\mu_1 \dots \mu_n}$.
+The determinant of a $n \times n$-matrix may be written as
+%
+\begin{equation}
+    \det(A) = \frac{1}{n!} \varepsilon_{\mu_1\dots\mu_n}\varepsilon^{\nu_1\dots\nu_n}
+    A^{\mu_1}{}_{\nu_1} \dots A^{\mu_n}{}_{\nu_n}.
+\end{equation}
+%
+For a matrix $M$, then, we can write
+%
+\begin{align}
+    \nonumber
+    \det(\one + \varepsilon M) &
+    = 
+    \frac{1}{n!}
+    \varepsilon_{\mu_1\dots}\varepsilon^{\nu_1\dots}
+    (\one + \epsilon M)^{\mu_1}{}_{\nu_1}  (\one + \epsilon M)^{\mu_2}{}_{\nu_2} \dots\\
+    \nonumber
+    & =
+    \frac{1}{n!}\varepsilon_{\mu_1\dots} \varepsilon^{\nu_1\dots} 
+    [
+        \delta^{\mu_1}_{\nu_1} \delta^{\mu_2}_{\nu_2} \dots 
+        + 
+        \epsilon(
+            M^{\mu_1}{}_{\nu_1} \delta^{\mu_2}_{\nu_2}\dots 
+            + M^{\mu_2}{}_{\nu_2}\delta^{\mu_1}_{\nu_1}\dots 
+            +\dots)
+    + \Oh(\epsilon^2)]\\
+   & 
+   = 1 + M^{\mu}{}_{\mu}  + \mathcal{O}(\epsilon^2).
+\end{align}
+%
+Using 
+%
+\begin{equation}
+    \det(g^\mu{}_\nu + \epsilon \eta^\mu{}_\nu)
+    =\det(g^\mu{}_\rho[\delta^\rho_\nu + \epsilon g^{\rho\lambda} \eta_{\lambda\nu}])
+    = \det(g^\mu{}_\rho) (1  + \epsilon g^{\nu\lambda} \eta_{\lambda\nu}),
+\end{equation}
+we get
+%
+\begin{align}
+    \delta \sqrt{|g|}  
+    =
+    \frac{1}{2}
+    \frac{1}{\sqrt{|g|}} \frac{g}{|g|} 
+    \delta \det(g^\mu{}_\nu)
+    = -\frac{1}{2}\sqrt{|g|} g^{\mu \nu} \delta g_{\mu\nu}
+\end{align}
+%
+The minus sign is due to the determinant of a Lorentzian metric being negative. 
+Assuming the Lagrangian only depends on the metric directly, and not its derivatives, the variation of the action is
+%
+\begin{equation}
+    \delta_g S
+    = 
+    \int_\Em \dd^n x \, \sqrt{|g|}
+    \left(
+       \pdv{\Ell}{g^{\mu\nu}}
+    - \frac{1}{2}g_{\mu \nu} \Ell 
+    \right) \delta g^{\mu \nu}.
+\end{equation}
+%
+With the Lagrangian in \autoref{Lagrangian curved spacetime}, we get
+%
+\begin{equation}
+    \label{functional derivative with respect to metric}
+    \fdv{S}{g^{\mu \nu}}
+    =
+    \pdv{\Ell}{g^{\mu\nu}}
+    - \frac{1}{2}g_{\mu \nu} \Ell 
+    =
+    - \frac{1}{2}
+    \left(
+        \frac{1}{2} \nabla_\mu \varphi \nabla_\nu \varphi + \frac{1}{2} m^2 \varphi^2 g_{\mu \nu} + \dots
+    \right).
+\end{equation}
+%
+We recognize the $(\mu, \nu )= (0, 0)$-component as negative half the Hamiltonian density, which supports the definition of the definition of the stress-energy tensor \autoref{definition stress energy densor}~\autocite{carrollSpacetimeGeometryIntroduction2019}.
+ 
+
+
+
+\subsection{Functional derivative of the Einstein-Hilbert action}
+\label{subsection: functional derivative of the einstein-hilbert action}
+
+In the Einstein-Hilbert action, \autoref{Einstein-Hilbert action}, the Lagrangian density is $\Ell = k R = k g^{\mu \nu} R_{\mu \nu}$, where $k$ is a constant and $R_{\mu \nu}$ the Ricci tensor, \autoref{Ricci tensor}.
+As the Ricci tensor is dependent on both the derivative and second derivative of the metric, the variation is
+%
+\begin{equation}
+    \delta S_{\text{EH}} = k \int_{\Em} \dd^n x \, \sqrt{|g|}
+    \left( \delta R - \frac{1}{2} g_{\mu \nu} \delta g^{\mu \nu}  R  \right).
+\end{equation}
+%
+The variation of the Ricci scalar is
+%
+\begin{equation}
+    \delta R = R_{\mu \nu} \delta g^{\mu \nu} + g^{\mu \nu} \delta R_{\mu \nu},
+\end{equation}
+%
+We can write the variation of the Ricci scalar, and thus the Riemann curvature tensor, in terms of variations in Christoffel symbols, $\delta \Gamma^{\rho}_{\mu \nu}$ using the explicit formula for a symmetric, metric-compatible covariant derivative, \autoref{riemann tensor in terms of christoffel symbols}.
+As $\delta \Gamma = \Gamma - \Gamma'$, it is a tensor, and we may write
+%
+\begingroup
+\allowdisplaybreaks
+\begin{align*}
+    \delta R^\rho{}_{\sigma \mu \nu} 
+    & = \delta(
+        \partial_{\mu} \Gamma^\rho_{\nu \sigma} 
+        - \partial_{\nu} \Gamma^\rho_{\mu \sigma}
+        + \Gamma^\rho_{\lambda \mu} \Gamma^\lambda_{\nu \sigma}
+        - \Gamma^\rho_{\lambda \nu} \Gamma^\lambda_{\mu \sigma}
+        )\\
+    & = \partial_{\mu} \delta \Gamma^\rho_{\nu \sigma} 
+        + \Gamma^\rho_{\lambda \mu}\delta \Gamma^\lambda_{\nu \sigma}
+        - \Gamma^\lambda_{\mu \sigma}   \delta \Gamma^\rho_{\lambda \nu}
+        - \left( 
+            \partial_{\nu} \delta \Gamma^\rho_{\mu \sigma} 
+            + \Gamma^\rho_{\lambda \nu}\delta \Gamma^\lambda_{\mu \sigma}
+            - \Gamma^\lambda_{\nu \sigma} \delta \Gamma^\rho_{\lambda \mu} 
+        \right)
+        \\ & \quad
+        + (\Gamma^{\lambda}_{\mu\nu}\delta\Gamma^\rho_{\lambda \sigma} 
+        - \Gamma^{\lambda}_{\mu\nu}\delta\Gamma^\rho_{\lambda \sigma}) \\
+    & = \nabla_{\mu}\delta \Gamma^\rho_{\nu \sigma} 
+        - \nabla_{\nu}\delta \Gamma^\rho_{\mu \sigma}
+     = \nabla_\eta \left(g^\eta{}_{\mu} \delta\Gamma^\rho_{\nu \sigma} 
+        - g^\eta{}_{\nu} \delta\Gamma^\rho_{\mu \sigma} \right) 
+    := \nabla_\eta K^{\rho\eta}{}_{\mu \rho \nu},
+\end{align*}
+\endgroup
+%
+where $K$ is a tensorial quantity, which vanishes at the boundary of our spacetime.
+Using the generalized divergence theorem, \autoref{generalized divergence theorem}, we see the contribution to the action from this quantity vanish.
+The contribution comes from an integral over $g^{\mu \nu} \delta R_{\mu \nu} = g^{\mu \nu} \delta R^{\rho}{}_{\mu \rho \nu} = g^{\mu \nu} \nabla_\eta K^{\rho\eta}{}_{\mu \rho \nu}$
+Using metric compatibility, we can exchange the covariant derivative and the metric, and we have $g^{\mu \nu} \delta R_{\mu \nu} = \nabla_\eta [g^{\mu \nu}K^{\rho \eta}{}_{\mu \rho \nu}]$.
+The contribution to the action therefore becomes
+%
+\begin{equation}
+    \int_\Em \dd^4 x \, \sqrt{|g|} g^{\mu \nu} \delta R_{\mu \nu} 
+    = \int_\Em \dd^4 x \, \sqrt{|g|} \nabla_\eta K^{\eta \rho \mu}{}_{\rho \mu}
+    = \int_{\partial \Em} \dd^3 y \, \sqrt{|\gamma|} n_\eta K^{\eta \rho \mu}{}_{\rho \mu} = 0,
+\end{equation}
+where we used the fact that $\delta g_{\mu \nu}$, and thus $K$, vanish at $\partial \Em$, and the generalized form of the divergence theorem, \autoref{generalized divergence theorem}.
+The variation of the action is therefore
+%
+\begin{equation}
+    \delta S_{\text{EH}} = k \int_\Em \dd^n x \sqrt{|g|} \left[R_{\mu \nu} - \frac{1}{2} R g_{\mu \nu}\right] \delta g^{\mu \nu},
+\end{equation}
+%
+and by the definition of the functional derivative,
+%
+\begin{equation}
+    \label{functional derivatie einstein-hilber action}
+    \fdv{S_{\text{EH}}}{g^{\mu \nu}} 
+    =
+    k\left(R_{\mu \nu} - \frac{1}{2} R g_{\mu \nu}\right).
+\end{equation}
+
+
+
+
+\subsection{Nöther's theorem}
+\label{subsection: nothers theorem}
+
+One of the most profound consequences of symmetry in physics is the appearance of conserved quantities.
+Assume we have a set of fields $\varphi_i$. Nöther's theorem tells us that if the Lagrangian $\Ell[\varphi_i]$ has a continuous symmetry, then there is a corresponding conserved current~\autocite{carrollSpacetimeGeometryIntroduction2019,peskinIntroductionQuantumField1995}.
+Consider an infinitesimal transformation,
+%
+\begin{equation}
+    \varphi_i(x) \longrightarrow \varphi_i'(x)
+    = \varphi_i(x) + \delta \varphi_i(x).
+\end{equation}
+%
+Applying this transformation to the Lagrangian will in general change its form,
+%
+\begin{equation}
+    \Ell[\varphi] \rightarrow \Ell[\varphi']
+    = \Ell[\varphi] + \delta \Ell.
+\end{equation}
+%
+We assume this transformation is a symmetry, i.e.,
+%
+\begin{equation}
+    \label{eq 1}
+    \delta \Ell = \partial_\mu K^\mu.
+\end{equation}
+%
+By considering the Lagrangian as a function of the field and its derivatives, $\Ell = \Ell(\varphi_i, \partial_\mu \varphi_i)$, we can write the difference term as a Taylor expansion around $(\varphi_i, \partial_\mu \varphi_i)$,
+%
+\begin{align}
+    \delta \Ell
+    = \pdv{\Ell}{\varphi_i} \delta \varphi_i
+    + \pdv{\Ell}{(\partial_\mu \varphi_i)} \delta (\partial_\mu \varphi_i),
+\end{align}
+%
+where $\delta (\partial_\mu \varphi_i) = \partial_\mu \varphi_i' - \partial_\mu \varphi_i$.
+By the linearity of the derivative,
+%
+\begin{equation}
+    \delta (\partial_\mu \varphi_i)
+    = \partial_\mu \varphi_i' - \partial_\mu \varphi_i
+    = \partial_\mu (\varphi_i' - \varphi_i)
+    = \partial_\mu \delta \varphi_i.
+\end{equation}
+%
+With this, and the Euler-Lagrange equations
+%
+\begin{equation}
+    \partial_\mu \pdv{\Ell}{(\partial_\mu \varphi_i)} - \pdv{\Ell}{\varphi_i} = 0,
+\end{equation}
+%
+we can rewrite
+%
+\begin{equation}
+    \label{eq 2}
+    \delta \Ell = \left( \partial_\mu \pdv{\Ell}{(\partial_\mu \varphi_i)} \right) \delta \varphi_i
+    + \pdv{\Ell}{(\partial_\mu \varphi_i)} (\partial_\mu \delta \varphi_i)
+    = \partial_\mu \left(\pdv{\Ell}{(\partial_\mu \varphi_i)} \delta \varphi_i\right).
+\end{equation}
+%
+If we define the current
+%
+\begin{equation}
+    J^\mu = \pdv{\Ell}{(\partial_\mu \varphi_i)} \delta \varphi_i(x) - K^\mu,
+\end{equation}
+%
+then combining \autoref{eq 1} and \autoref{eq 2} gives
+%
+\begin{equation}
+    \label{Nothers theorem}
+    \partial_\mu J^\mu = 0.
+\end{equation}
+%
+This is Nöther's theorem; a continuous symmetry implies the existence of a conserved current.
+
+The current flux through some spacelike surface $V$ defines a conserved charge. The surface of constant time in some reference frame has the normal vector $n_\mu = (1, 0, 0, 0)$, so the charge is
+%
+\begin{equation}
+    Q = \int_V \dd^4 x \, n_\mu J^\mu = \int_V \dd^3 x \, J^0.
+\end{equation}
+%
+We can then use the divergence theorem.
+Assume $\partial V$ is the boundary of $V$, which has the space-like normal vector $k_i$, and that the current falls quickly towards infinity.
+Then, using $\partial_\mu J^\mu = 0 $,
+\begin{equation}
+    \odv{Q}{t} 
+    = \int_V \dd^3 \, \partial_0 J^0
+    = - \int_V \dd^3 x \, \partial_i J^i 
+    = - \int_{\partial V} \dd^2 x\, k_i J^i 
+    = 0,
+\end{equation}
+%
+proving that the charge is conserved over time.
+These results, however, rely on the equations of motion.
+This is generally valid in classical mechanics.
+However, in quantum mechanics, the path integral is over \emph{all} paths, not just those that are on-shell, and we can therefore not assume the equations of motion vanish.
+We will later derive the quantum version of the conservation law \autoref{Nothers theorem}.
+

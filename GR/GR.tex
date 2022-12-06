@@ -1,0 +1,355 @@
+\section{General Relativity}
+
+
+
+General relativity describes how matter and energy curve the fabric of space and time.
+Einstein first wrote down the theory more than a century ago, and it is still our most accurate theory of gravitational effects.
+
+
+
+\todo[inline]{integrate old notes with new}
+
+\subsection{General Relatvity --- Old notes}
+Einsteins field equations are given by the action ($g = \mathrm{diag}(1, -1, -1, -1)$)$S[g_{\mu \nu}] = S_H + S_M.$
+Here, $S_M$ is the action of matter and energy, which gives the (non-cannonical) energy-momentum tensor
+\begin{equation*}
+    T_{\mu \nu} = \frac{-2}{\sqrt{g}} \frac{\delta S_M}{\delta g^{\mu \nu}} \implies \delta S_M[g_{\mu \nu}] = \int_\Omega \dd^4x (-2 T_{\mu\nu})\delta g^{\mu \nu}
+\end{equation*}
+The Hilbert Lagrangian is
+\begin{equation*}
+    \Ell_h[g_{\mu \nu}] = \frac{1}{2\kappa} (R - 2\Lambda),
+\end{equation*}
+thus vary Hamilton pricinple yields
+\begin{align*}
+    2 \kappa \,\delta S_H 
+    & = \delta \int_{\Omega} \dd^4 x \, \sqrt{g} \frac{1}{2 \kappa }\left(R - 2\Lambda\right) 
+    = \int_{\Omega} \dd^4 x \,  \left( \sqrt{g}\delta (g^{\mu \nu} R_{\mu \nu})  - \frac{1}{2} \sqrt{g} g_{\mu \nu}\delta g^{\mu \nu} \left[R  + 2\Lambda \right]\right) \\
+    & = \int_{\Omega} \dd^4 x \,\sqrt{g}  \left( R_{\mu \nu}  - \frac{1}{2} R g_{\mu \nu}  + \Lambda g_{\mu \nu}  \right) 
+    + \int_{\Omega} \dd^4 x \,\sqrt{g}\,  \nabla_\eta g^\mu{}_\rho\left(  g^\eta{}_{\mu} \delta \Gamma^\rho_{\nu \sigma} - g^\eta{}_{\nu} \delta \Gamma^\rho_{\mu \sigma} \right) = - \delta S_M
+\end{align*}
+This gives us the Einstein field equation
+\begin{equation*}
+    R_{\mu \nu}  - \frac{1}{2} R g_{\mu \nu}  + \Lambda g_{\mu \nu}  = \kappa T_{\mu \nu}
+\end{equation*}
+The Einstein equation encodes the information of the trace of the Riemann tensor.
+Taking the trace-reverse of the equation, and Weyl tensor and the Bianchi identity implies $\nabla_{\lambda}R_{\rho \sigma \mu \nu} = - \nabla_{\rho }R_{\sigma \lambda \mu \nu} - \nabla_{\sigma  }R_{\lambda \rho \mu \nu}$ and $\nabla_\mu R^\mu{}_{\nu} = \frac{1}{2}\nabla_\nu R$, we find using the symmetries of the Reimann tensor that $g^{\rho \lambda}\nabla_{\lambda}R_{\rho \sigma \mu \nu}= 2 \nabla_{[\mu} R_{\nu]\sigma} $, and thus that
+\begin{align*}
+    \nabla^\rho C_{\rho \sigma \mu \nu} 
+    & = g^{\lambda \rho}\nabla_\lambda R_{\mu \nu \rho \sigma} - \frac{2}{n - 2} \left(\nabla_{[\mu}R_{\nu]\sigma} - \nabla^\rho g_{\sigma [\mu}R_{\nu]\rho} \right)+ \frac{2 }{(n - 1)(n - 2)} \nabla_{[\mu}g_{\nu]\sigma} R. \\
+    & = 2\frac{n - 3}{n - 2} \nabla_{[\mu} \left(R_{\nu]\sigma} + \frac{1}{2(n-1)} g_{\nu] \sigma } R\right) := 2 \frac{n - 3}{n - 2} C_{[\mu \nu] \sigma}
+\end{align*}
+This is the Cotton tensor. Using the fact that $g^{\mu \nu}T_{\mu \nu} := T = -1/\kappa( R - n \Lambda)$, and trace reversing the Einstein equation, $R_{\mu \nu} = \kappa (T_{\mu \nu} - 1/2 T g_{\mu \nu} - \Lambda g_{\mu \nu})$, we get a differential relationship between the Weyl tensor and the energy momentum tensor, 
+\begin{equation*}
+    \nabla^\rho C_{\rho \sigma \mu \nu} = 2 \kappa \frac{n - 3}{n - 2} \nabla_{[\mu}\left(T_{\nu] \sigma} - \frac{n}{2(n - 1)} Tg_{\nu] \sigma}\right) (?????)
+\end{equation*}
+
+
+
+\subsection{Newtonian Gravity}
+
+This section is based on~\autocite{carrollSpacetimeGeometryIntroduction2019}.
+
+
+Newton's famous law of gravity states that the force of gravity from an object of mass $M$ acting on another object of mass $m$ is proportional to both objects' masses and is inversely proportional to the distance between them squared.
+This force is directed radially inwards.
+Formulating this as an equation, with $\vec r$ as the vector from the object with mass $M$ to that with mass $m$ with length $|\vec r| = r$, gives
+%
+\begin{equation}
+    \vec F_g = - \frac{G M m}{r^2} \hat r.
+\end{equation}
+%
+Here, $G$ is Newton's gravitation constant, and $\hat r = \vec r / r$.
+The vector $\vec r$ is a purely spatial three-vector, as space is separated from time in the Newtonian picture.
+The law of gravitation, together with Newton's second law of motion
+%
+\begin{equation}
+    \label{Newton's second law}
+    \sum_i \vec F_i = m \vec a,
+\end{equation}
+%
+where $\vec a$ is the acceleration of an object and $\vec F_i$ the forces acting upon it, can account for the motion of stellar objects.
+These laws work well in all but the most extreme circumstances, involving very massive objects or very short distances.
+As we will see, such extreme circumstances can be quantified by $2G M \approx r$.
+Newtonian gravity works well as an approximation because $G$ is small in everyday units.
+Highly precise measurements of the orbit of Mercury were needed before any deviation from it was noticed.
+
+We restate Newtonian gravity in a field-theoretic language to better compare Newtonian gravity to its successor theory.
+The gravitational potential from a mass $M$, which gives rise to Newton's force law, obeys the equation
+%
+\begin{equation}
+    \nabla^2 \Phi_g = - 4 \pi G \rho.
+\end{equation}
+%
+Here, $\rho$ is the mass density.
+For a single point mass, $\rho(\vec r) = M \delta(\vec r)$, this has the solution $\Phi_g = -G M / r$.
+The acceleration due to gravity is then
+%
+\begin{equation}
+    \label{acceleration from Newtonian gravitational potential}
+    \vec a = - \vec \nabla \Phi_g.
+\end{equation}
+%
+We see that mass acts as a gravitational charge.
+Due to the success of Newtonian gravity, we expect it to be a limit of any theory that succeeds it.
+This gives us the ability to theoretically test any new theory of gravity, as well as to connect parameters in the new theory to old, known quantities.
+
+
+
+\subsection{General relativity}
+This section is based on~\cite{carrollSpacetimeGeometryIntroduction2019,glendenningCompactStarsNuclear2012}.
+
+The derivation of the spherically symmetric metric is done using computer code, as described in \autoref{appendix: code}.
+
+
+
+\subsection{Einstein's field equations}
+
+General relativity describes spacetime as a smooth manifold $\Em$, with a (pseudo-Riemannian) metric, $g_{\mu \nu}$.
+This metric is treated as a dynamical field, which is affected by the presence of matter and energy.
+The matter and energy contents of spacetime are encoded in the stress-energy tensor $T_{\mu \nu}$, while the behavior of $g^{\mu \nu}$ is encoded in a scalar Lagrangian density.
+We employ the minimal-coupling rule to reformulate laws from special relativity to curved spacetime.
+This rule states that laws written in an inertial frame in a coordinate-independent way remain true in curved spacetime.
+In an inertial frame, the Crisoffel-symbols vanish, so $\nabla_\mu = \partial_\mu$.
+We can thus write any laws containing partial derivatives in a coordinate impenitent way by exchanging them for covariant derivatives.
+To generalize Newton's second law \autoref{Newton's second law}, we must first make it relativistic by introducing a 4-force, $F^\mu = \odv{}{\tau} p^\mu $, where $p^\mu$ is the 4-momentum.
+When applying the minimal coupling rule, Newton's second law then becomes \autoref{goedesic equation},~\autocite{hartleGravityIntroductionEinstein2021}
+%
+\begin{equation}
+    \label{covariant version of second law}
+    \sum_i F_i^\mu 
+    = m \left(
+        \odv[2]{x^\mu}{\tau} + \Gamma^\mu_{\nu \rho} \odv{x^\nu}{\tau} \odv{x^\rho}{\tau}
+    \right).
+\end{equation}
+%
+In the absence of any external forces, objects will follow geodesics in spacetime.
+With this, we must now find the law governing $g^{\mu\nu}$.
+As this is a field, we will do this by assigning it a Lagrangian density.
+The most obvious---and correct---choice as the Lagrangian is the Ricci scalar, which results in the Einstein-Hilbert action,
+%
+\begin{equation}
+    \label{Einstein-Hilbert action}
+    S_{\text{EH}} = \frac{1}{2\kappa}\int_{\Em} \dd^n x \, \sqrt{|g|}\, R.
+\end{equation}
+%
+The $\sqrt{|g|}$-factor is included for the integral to be coordinate-independent, as discussed in  \autoref{subsection: integration on manifolds}.\footnote{The gravitational action can also include a cosmological constant, modifying the Lagrangian to $R + 2 \Lambda$. This constant does not affect the subject of this thesis and is therefore not included here.}
+The $\kappa$ is a constant and decides how strong the coupling of gravity to matter and energy is.
+This constant can then be related to Newton's constant of gravitation $G$ by $\kappa = 8 \pi G$.
+When including the contributions from other fields with an action $S_\text{m}$, the total action becomes 
+%
+\begin{equation}
+    S = S_\text{EH} + S_\text{m}.
+\end{equation}
+%
+The equations of motion of the dynamical field, which in this case is the metric, are given by Hamilton's principle of stationary action.
+Using functional derivatives, as defined in \autoref{subsection: functional calculus on a curved manifold}, this is stated as
+%
+\begin{equation}
+    \fdv{S}{g^{\mu\nu}} = 0.
+\end{equation}
+%
+We define the stress-energy tensor as
+%
+\begin{equation}
+    \label{definition stress energy densor}
+    T_{\mu\nu} = - 2 \fdv{S_\text{m}}{g^{\mu \nu}}.
+\end{equation}
+%
+The functional derivative of the Einstein-Hilbert action is evaluated in \autoref{subsection: functional derivative of the einstein-hilbert action}, and with the result, \autoref{functional derivatie einstein-hilber action}, we get the Einstein field equations
+%
+\begin{equation}
+    \label{Einstein field equations}
+    R_{\mu \nu} - \frac{1}{2} R g_{\mu \nu} = \kappa T_{\mu \nu}.
+\end{equation}
+%
+The left-hand side of the Einstein field equations is called the Einstein tensor, $G_{\mu \nu} = R_{\mu \nu} - \frac{1}{2} R g_{\mu \nu}$. This tensor obeys the identity
+%
+\begin{equation}
+    \label{Einstein tensor bianchi identity}
+    \nabla^\mu G_{\mu \nu} = 0,
+\end{equation}
+%
+as a consequence of the more general Bianchi identity, \autoref{Binachi identiy}.
+
+
+\subsection{Spherically symmetric spacetime}
+
+To model stars, we will assume that the metric is spherically symmetric and time-independent.
+In this case, the most general metric can be written, at least locally, as~\autocite{carrollSpacetimeGeometryIntroduction2019}
+%
+\begin{equation}
+    \dd s^2 
+    = e^{2\alpha(r)} \dd t^2 - e^{2 \beta(r)} \dd r^2 - 
+    r^2 (\dd \theta^2 + \sin^2 \theta \, \dd \varphi^2),
+\end{equation}
+%
+where $\alpha$ and $\beta$ are general functions of the radial coordinate $r$.
+In matrix form, this corresponds to 
+%
+\begin{equation}
+    \label{spherically symmetric metric}
+    g_{\mu \nu} =
+    \left(
+        \begin{matrix}
+            e^{2 \alpha{\left(r \right)}} & 0 & 0 & 0\\
+            0 & - e^{2 \beta{\left(r \right)}} & 0 & 0
+            \\0 & 0 & - r^{2} & 0
+            \\0 & 0 & 0 & - r^{2} \sin^{2}{\left(\theta \right)}
+        \end{matrix}
+     \right).
+\end{equation}
+%
+Using \autoref{christoffel symbols from metric}, we can now compute the Christoffel symbols in terms of the unknown functions.
+These computations in this subsection are done using computer code, which is shown in \autoref{appendix: code}.
+The results are
+%
+\begin{align}
+    \Gamma^t_{\mu \nu}
+    & =
+    \left(
+        \begin{matrix}
+            0 & \odv{}{r} \alpha{\left(r \right)} & 0 & 0\\\odv{}{r} \alpha{\left(r \right)} & 0 & 0 & 0\\0 & 0 & 0 & 0\\0 & 0 & 0 & 0
+        \end{matrix}
+    \right), \\
+    \Gamma^r_{\mu \nu}
+    &=
+    \left(
+        \begin{matrix}
+            e^{2 \alpha{\left(r \right)}} e^{- 2 \beta{\left(r \right)}} \odv{}{r} \alpha{\left(r \right)} & 0 & 0 & 0\\0 & \odv{}{r} \beta{\left(r \right)} & 0 & 0\\0 & 0 & - r e^{- 2 \beta{\left(r \right)}} & 0\\0 & 0 & 0 & - r e^{- 2 \beta{\left(r \right)}} \sin^{2}{\left(\theta \right)}
+        \end{matrix}
+     \right), \\
+     \Gamma^\theta_{\mu \nu} 
+     & =
+     \left(
+         \begin{matrix}
+            0 & 0 & 0 & 0\\0 & 0 & \frac{1}{r} & 0\\0 & \frac{1}{r} & 0 & 0\\0 & 0 & 0 & - \sin{\left(\theta \right)} \cos{\left(\theta \right)}
+        \end{matrix}
+    \right), \\
+    \Gamma^\phi_{\mu \nu} 
+    &=
+    \left(
+        \begin{matrix}
+            0 & 0 & 0 & 0\\0 & 0 & 0 & \frac{1}{r}\\0 & 0 & 0 & \frac{\cos{\left(\theta \right)}}{\sin{\left(\theta \right)}}\\0 & \frac{1}{r} & \frac{\cos{\left(\theta \right)}}{\sin{\left(\theta \right)}} & 0
+        \end{matrix}
+    \right).
+\end{align}
+%
+The symbols not included are zero.
+Substituting these results into \autoref{riemann tensor in terms of christoffel symbols} gives the Riemann curvature tensor.
+We can then obtain the Ricci tensor by taking the trace, as shown in \autoref{Ricci tensor}.
+The results are
+%
+\begin{align}
+    \label{tt component ricci tensor}
+    R_{tt}
+    & =
+    \left[
+        r \left(\odv{}{r} \alpha{\left(r \right)}\right)^{2} 
+        - r \odv{}{r} \alpha{\left(r \right)} \odv{}{r} \beta{\left(r \right)} 
+        + r \odv[2]{}{r} \alpha{\left(r \right)} 
+        + 2 \odv{}{r} \alpha{\left(r \right)}
+    \right]
+    \frac{
+         e^{2 \alpha{\left(r \right)}} e^{- 2 \beta{\left(r \right)}}}{r}, \\
+    \label{rr component ricci tensor}
+    R_{rr}
+    & =
+    - \frac{1}{r}
+    \left[
+        r \left(\odv{}{r} \alpha{\left(r \right)}\right)^{2} 
+        - r \odv{}{r} \alpha{\left(r \right)} \odv{}{r} \beta{\left(r \right)} 
+        + r \odv[2]{}{r} \alpha{\left(r \right)} - 2 \odv{}{r} \beta{\left(r \right)} 
+    \right],\\
+    \label{thetatheta component ricci tensor}
+    R_{\theta \theta}
+    &=
+    -  
+    \left[
+        r \odv{}{r} \alpha{\left(r \right)} - r \odv{}{r} \beta{\left(r \right)} - e^{2 \beta{\left(r \right)}} + 1
+    \right]
+        e^{- 2 \beta{\left(r \right)}}, \\
+    R_{\varphi \varphi} & = R_{\theta \theta} \sin^2( \theta).
+\end{align}
+%
+All other components are zero.
+Finally, the trace of the Ricci tensor gives the Ricci scalar,
+%
+\begin{align}
+    \nonumber
+    R =
+    \, \frac{2 e^{- 2 \beta{\left(r \right)}}}{r^{2}}
+    \bigg[
+        &
+        r^{2} \left(\odv{}{r} \alpha{\left(r \right)}\right)^{2} 
+        - r^{2} \odv{}{r} \alpha{\left(r \right)} \odv{}{r} \beta{\left(r \right)}
+        \\ &
+        + r^{2} \frac{d^{2}}{d r^{2}} \alpha{\left(r \right)} 
+        + 2 r \odv{}{r} \alpha{\left(r \right)} 
+        - 2 r \odv{}{r} \beta{\left(r \right)} - e^{2 \beta{\left(r \right)}} + 1
+    \bigg].
+\end{align}
+%
+ The unknown functions $\alpha$ and $\beta$ are now determined by the matter and energy content of the universe, which is encoded in $T_{\mu \nu}$, through Einstein's field equation, \autoref{Einstein field equations}. 
+
+
+
+\subsection{The Schwarzschild metric}
+
+
+The simples case for a matter distribution in spacetime is $T_{\mu \nu} = 0$.
+Although this might only seem to be useful to model a non-empty universe, it can be combined with a central point particle and empty space elsewhere.
+In this case, the Einstein equations are simply $R_{\mu \nu} - \frac{1}{2}R g_{\mu \nu} = 0$.
+We can show that the trace of the Ricci tensor is zero by taking the trace of this equation, simplifying it to $R_{\mu \nu} = 0$.
+By combining \autoref{tt component ricci tensor} and \autoref{rr component ricci tensor}, we find
+%
+\begin{equation}
+    R_{tt} + e^{2(\alpha - \beta)}R_{rr} = 2 \odv{}{r} \left(\alpha + \beta\right) = 0,
+\end{equation}
+%
+which implies $\alpha = -\beta + \const$
+The constant corresponds to rescaling the coordinates, which allows us to set it to zero.
+From \autoref{thetatheta component ricci tensor}, we get
+%
+\begin{equation}
+    e^{2 \beta} R_{\theta \theta} = - 2 r\odv{}{r} \alpha - e^{-2\alpha} + 1 = 0,
+\end{equation}
+%
+which may be restated as
+%
+\begin{equation}
+    \odv{}{r} \left(r e^{2 \alpha}\right) = 1.
+\end{equation}
+%
+This equation has the solution
+%
+\begin{equation}
+    e^{2\alpha(r)} = e^{-2 \beta(r)} = \left( 1- \frac{R_s}{r} \right),
+\end{equation}
+%
+where $R_s$, the Schwarzschild radius, is a constant.
+With this, we should obtain Newton's law of gravity with a small perturbation, $g_{\mu \nu} = \eta_{\mu \nu} + h_{\mu \nu}$, and at slow speeds, $\odv*{x^i}{\tau} \ll \odv*{t}{\tau}$.
+Inserting this into the geodesic equation \autoref{covariant version of second law} with $F_i = 0$, using $\partial_0 g_{\mu \nu} = 0$ and expanding to leading order, we get
+%
+\begin{equation}
+    \odv[2]{x^i}{t} = \frac{1}{2}\eta^{i j}\partial_j h_{00}.
+\end{equation}
+%
+We now obtain Newtonian gravity, as formulated in \autoref{acceleration from Newtonian gravitational potential}, if we identify $h_{00} = 1 -  e^{2\alpha} = - 2 \Phi_g$.
+The Schwarzschild radius is thus $R_s = 2 G M$, and we see that this solution corresponds to a point-mass $M$ located at $\vec r = 0$.
+We will extend our discussion to finite densities in the next section.
+Inserting our results into the metric, we get the Schwarzschild metric
+%
+\begin{equation}
+    \label{Schwarzchild metric}
+    \dd s^2 
+    = 
+    \left( 1 - \frac{2 G M}{r} \right) \dd t^2
+    -\left( 1 - \frac{2 G M}{r} \right)^{-1} \dd r^2
+    - r^2 \left(\dd \theta^2 + \sin^2 \theta \dd \varphi^2\right).
+\end{equation}
+%
+
+
+
+
+

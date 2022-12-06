@@ -1,0 +1,58 @@
+% New names for derivatives
+\newcommand{\odv}[3][1]{\diff[#1]{#2}{#3}}
+\newcommand{\pdv}[3][1]{\diffp[#1]{#2}{#3}}
+\newcommand{\fdv}[3][1]{\diff.delta.[#1]{#2}{#3}}
+
+
+% Shorthands
+\newcommand{\dd}{\mathrm{d}}
+
+% Expectation value
+\newcommand{\E}[1]{\left \langle #1 \right \rangle}
+
+% Fancy letters     
+\newcommand{\Eff}{\mathcal F}
+\newcommand{\D}{\mathcal D}
+\newcommand{\Ce}{\mathcal C}
+\newcommand{\A}{\mathcal A}
+\newcommand{\Oh}{\mathcal O}
+\newcommand{\V}{\mathcal V}
+\newcommand{\Ci}{\mathcal C}
+\newcommand{\N}{\mathcal N}
+\newcommand{\He}{\mathcal H}
+\newcommand{\R}{\mathbb R}
+\newcommand{\Ell}{\mathcal L}
+
+
+
+% Operations
+\newcommand{\Tr}{\mathrm{Tr}}
+
+% Means-square limit
+\newcommand{\mslim}[1]{ \underset{#1}{ \operatorname{ms-lim} }}
+
+\newcommand{\const}{\mathrm{const.}}
+\DeclareMathOperator{\sgn}{sgn}
+
+%%%%%%%
+% New %
+%%%%%%%
+
+\newcommand{\eps}{\varepsilon}
+\newcommand{\Em}{\mathcal M}
+% Identity matice/operation
+\newcommand{\one}{\text{\usefont{U}{bbold}{m}{n}1}}
+\MakeRobust{\one}
+
+% Set builder notation
+\newcommand{\setbuilder}[2]{\left\{\, #1 \mid #2 \,\right\}}
+
+
+%! Fix these
+\newcommand{\Olie}{\text O}
+\newcommand{\SO}{\text{SO}}
+
+\newcommand{\Lie}[2]{\text{#1}\left(#2\right)}
+\newcommand{\lie}[2]{\mathfrak{#1}\left(#2\right)}
+
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}

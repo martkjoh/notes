@@ -1,0 +1,80 @@
+\usepackage[
+  left=2.5cm, 
+  right=2.5cm, 
+  top=2cm, 
+  bottom=2cm, 
+]{geometry}
+
+
+% math mode additions
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools} 
+
+% nice derivatives
+\usepackage[ISO]{diffcoeff}
+
+% in-document references
+\usepackage{hyperref}
+
+% Colors, f.ex. in mdframed boxes
+\usepackage[]{xcolor}
+
+% make todo-notes
+\usepackage[color=blue!40]{todonotes}
+
+% Text boxes
+\usepackage{mdframed}
+
+% Nice eq and subsection reference
+\usepackage[capitalize]{cleveref}
+
+% Braket notation
+\usepackage{braket}
+
+% Strike through (sout)
+% without normalem, it overwrites \emph :(
+\usepackage[normalem]{ulem}
+
+% to write 'goes to zero/infinity' in equatoations
+\usepackage{cancel}
+
+% for the floatbarrier macro
+\usepackage{placeins}
+
+% Drawings/feynman diagrams
+\usepackage{tikz}
+\usepackage{tikz-feynman}
+
+% Tabel of contents
+\usepackage{tocloft}
+
+
+\usepackage[%
+    style=numeric-comp, % Combine consecutive citations, i.e., [15]-[19]
+    sorting=none,       % Sorts citations after their appearance in the document
+    sortcites=true,     % Sorts within one "autocite", i.e., [15][17][44]
+    doi=true,
+    giveninits=true,    % use initials
+    hyperref
+    ]{biblatex}
+
+
+
+
+% only subsection in toc
+\setcounter{tocdepth}{2}
+
+
+%%%
+% New to notes
+
+\usepackage{amsthm}
+\newtheorem*{definition}{Definition}
+
+\usepackage{slashed}
+\usepackage{tikz-cd}
+
+% adjust figures
+\usepackage[export]{adjustbox}

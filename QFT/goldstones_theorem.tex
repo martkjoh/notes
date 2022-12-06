@@ -1,0 +1,450 @@
+\subsection{Symmetry and Goldstone's theorem}
+\label{section: symmetry and goldstone's theorem}
+
+This section is based on~\autocite{leeIntroductionSmoothManifolds2003d,peskinIntroductionQuantumField1995,schwartzQuantumFieldTheory2013,weinbergQuantumTheoryFields1995,weinbergQuantumTheoryFields1996}.
+
+Symmetry plays a prominent role in modern physics.
+If we can transform a physical state in such a way that the governing equations of this system are unchanged, we call that transformation a \emph{symmetry transformation}.
+All such transformations are known as the symmetries of that theory.
+The symmetries of a theory encode a lot of physics, such as the presence of conserved quantities and the system's low energy behavior.
+We distinguish between internal and external symmetries.
+An external symmetry is an active coordinate transformation, such as rotations or translations.
+They relate degrees of freedom at different space-time points, while internal symmetries transform degrees of freedom at each space-time point independently.
+A further distinction is between global and local symmetry transformations.
+Global transformations have one rule for transforming degrees of freedom at each point, which is applied everywhere, while local transformations are functions of space-time.
+
+In classical field theory, symmetries are encoded in the behavior of the Lagrangian when the fields are transformed.
+We will consider continuous transformations, which can in general be written as
+\begin{equation}
+    \varphi(x) \longrightarrow \varphi'(x) = f_t[\varphi](x), \quad t \in [0, 1].
+\end{equation}
+%
+Here, $f_t[\varphi]$ is a functional in $\varphi$, and a smooth function of $t$, with the constraint that $f_0[\varphi] = \varphi$.
+This allows us to look at ``infinitesimal'' transformations,
+\begin{equation}
+    \label{infinitesimal transformation}
+    \varphi'(x) = f_\epsilon[\varphi] 
+    = \varphi(x) + \epsilon \odv{ f_t[\varphi] }{t}\bigg |_{t=0} + \Oh(\epsilon).
+\end{equation}
+%
+When considering infinitesimal transformations, we will not always write $ + \Oh(\epsilon)$, but rather consider it implicit.
+We will consider internal, global transformations which act linearly on $\varphi$.
+For $N$ fields, $\varphi_i$, this can be written
+\begin{equation}
+    \label{linear field transformation}
+    \varphi_i'(x) = \varphi_i(x) + i \epsilon \, V_{ij} \varphi_j(x).
+\end{equation}
+%
+$V_{ij}$ is called the generator of the transformation.
+A symmetry transformation of the system is then a transformation in which the Lagrangian left is unchanged, or at most differs by a 4-divergence term.
+That is, a transformation $\varphi \rightarrow \varphi'$ is a symmetry if 
+\begin{equation}
+    \Ell[\varphi'] = \Ell[\varphi] + \partial_\mu K^\mu[\varphi],
+\end{equation}
+%
+where $K^\mu[\varphi]$ is a functional of $\varphi$.\footnote{
+    Terms of the form $\partial_\mu K^\mu$ do not affect the physics, as the variational principle $\delta S = 0$ does not vary the fields at infinity. Together with the divergence theorem, this means that such terms do not influence the equations of motion.
+    }
+This is a requirement for symmetry in quantum field theory too.
+However, as physical quantities in quantum field theory are given not just by the action of a single state but the path integral, the integration measure $\D \varphi$ has to be invariant as well.
+If a classical symmetry fails due to the non-invariance of the integration measure, it is called an \emph{anomaly}.
+
+To investigate the symmetry properties of a quantum theory, we explore what constraints a symmetry imposes on the effective action.
+To that end, assume 
+\begin{equation}
+    \D \varphi'(x) = \D \varphi(x), \quad
+    S[\varphi'] = S[\varphi].
+\end{equation}
+%
+In the generating functional, such a transformation corresponds to a change of integration variable.
+Using the infinitesimal version of the transformation, we may write
+\begin{align}
+    \nonumber
+    Z[J]
+    &= \int \D \varphi \, \exp \left\{ {i S[\varphi] + i \int \dd^4 x \,J_i(x) \varphi_i(x)} \right\} \\\nonumber
+    &= \int \D \varphi' \, \exp \left\{ {i S[\varphi'] + i \int \dd^4 x \, J_i(x) \varphi'_i(x)} \right\}
+    \\
+    &= Z[J] + i \epsilon \int \dd^4 x \, J_i(x) \int \D \varphi \, [V_{ij} \varphi_j(x)] 
+    \,
+    e^{i S[\varphi]}.
+\end{align}
+%
+Using \autoref{effective equation of motion}, we can write this as
+\begin{equation}
+    \label{effective action symmetry requirement}
+    \int \dd^4 x \, \fdv{\Gamma[\varphi_J]}{\varphi_i(x)} \, V_{ij}\E{\varphi_j(x)}_J = 0.
+\end{equation}
+%
+This constraint will allow us to deduce the properties of a theory close to the ground state, only using information about the symmetries of the theory.
+
+
+The archetypical example of an internal, global, and continuous symmetry is the linear sigma model, which we will use as an example throughout this section.
+The linear sigma model is made up of $N$ real scalar fields $\varphi_i$, whose Lagrangian is
+\begin{equation}
+    \Ell[\varphi] 
+    = \frac{1}{2} \partial_\mu \varphi_i(x) \partial^\mu \varphi_i(x) - \V(\varphi),
+    \quad \V(\varphi) = - \frac{1}{2} \mu^2 \varphi_i(x)\varphi_i(x)
+    + \frac{1}{4} \lambda [\varphi_i(x) \varphi_i(x)]^2.
+\end{equation}
+%
+This system is invariant under the rotation of the $N$ fields into each other,
+\begin{equation}
+    \varphi_i \longrightarrow \varphi_i' = M_{ij} \varphi_j,
+    \quad M^{-1} = M^{T}.
+\end{equation}
+%
+The set of all such transformations forms the Lie group $\text{O}(N)$.
+For $N = 2$, and $\mu^2, \lambda > 0$ we get the ubiquitous Mexican hat potential, as illustrated in \autoref{fig: Mexican hat}.
+
+\begin{figure}[ht]
+    \centering
+    \hspace*{1cm}
+    \includegraphics[width=0.6\textwidth]{figurer/mexican_hat.pdf}
+    \caption{The Mexican hat potential is the classical potential $\V$ for the $N=2 $ linear sigma model.}
+    \label{fig: Mexican hat}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\subsection{Goldstone's theorem}
+
+A symmetry transformation will leave the governing equation of a theory unchanged.
+This, however, does not imply that physical states, such as the ground state, are invariant under this transformation.
+The $N = 2$ linear sigma model illustrates this.
+If we assume the ground state $\varphi_{0}$ is translationally invariant, then it is given by minimizing the effective potential, of which the classical potential, $\V$, is the leading order approximation.
+This potential is illustrated in \autoref{fig: Mexican hat}.
+The ground state is therefore given by any of the values along the brim of the potential.
+If we, without loss of generality, choose $\varphi_0 = (0, v)$ as the ground state, then any rotation will change this state.
+We say that the symmetry has been \emph{spontaneously broken}.
+
+To explore this in a general context, assume a theory of $N$ real scalar fields $\varphi_i$ are invariant under the actions of some Lie group, $G$.
+A symmetry $g \in G$ is broken if the vacuum expectation value of the original fields and the transformed fields differ.
+That is, if
+%
+\begin{equation}
+    \E{\varphi}_0 \neq \E{\varphi'}_0 = \E{g \varphi}_0.
+\end{equation}
+%
+We can now exploit what we learned about Lie groups to write the infinitesimal transformation as
+%
+\begin{equation}
+    \E{\varphi'}_0 = \E{\varphi}_0 + i \epsilon \eta_\alpha T_\alpha \E{\varphi}_0.
+\end{equation}
+%
+Let $x_\ell$ be the set of generators corresponding to broken symmetries, i.e.,
+%
+\begin{equation}
+    x_\ell \E{\varphi}_0 \neq 0.
+\end{equation}
+%
+These are called the \emph{broken generators}.
+The remaining set of generators $t_a$, which obey
+%
+\begin{equation}
+    t_a \E{\varphi}_0 = 0,
+\end{equation}
+%
+are called unbroken, and generate a subgroup $H \subset G$ as the set of symmetry transformations of the vacuum is a group.
+
+In \autoref{effective action symmetry requirement} we found that, if $V$ is the generator of some symmetry, then the effective action obeys
+%
+\begin{equation}
+    \int \dd^4 x\, \fdv{\Gamma[\varphi_J]}{\varphi_i} V_{ij} \E{\varphi_j}_0 = 0.
+\end{equation}
+%
+We now differentiate this expression with respect to $\varphi_k(y)$, which gives
+%
+\begin{equation}
+    \int \dd^4 x \, \fdv{\Gamma[\varphi_0]}{\varphi_k(y), \varphi_i(x)}
+    V_{ij} \E{\varphi_j}_0 = 0.
+\end{equation}
+%
+With the assumption that the ground state is constant, we get 
+%
+\begin{equation}
+    \pdv{\V_\mathrm{eff}}{\varphi_k, \varphi_i} \, V_{i j} \E{\varphi_j}_0 = 0.
+\end{equation}
+%
+This is trivial for unbroken symmetries, as $t^a_{ij}\E{\varphi_j}_0 = 0$ by definition.
+However, in the case of broken symmetries, the second derivative of the effective potential must have an eigenvector $x^\ell_{ij} \E{\varphi_j}_0$ with a zero eigenvalue for each broken generator.
+Here, $\ell$ labels the set of generators, while $(ij)$ are the indices corresponding to field-components $\varphi_i$.
+We found that the second derivative of the effective action is the inverse propagator,
+%
+\begin{equation}
+    D^{-1}_{ij}(x,y) 
+    = \fdv{\Gamma[\varphi_0]}{\varphi_i(y), \varphi_j(x)}
+    = \int \frac{\dd^4 p}{(2 \pi)^4} e^{-ip(x - y)} \, \tilde D^{-1}_{ij}(p).
+\end{equation}
+%
+Using this, we can write
+\begin{equation}
+    \tilde D^{-1}_{i j}(p=0) \, x^\ell_{jk} \E{\varphi_k}_0 
+    = 0.
+\end{equation}
+%
+Zeros of the inverse propagator correspond to the physical mass of particles.
+In Lorentz-invariant systems, each zero-eigenvalue vector corresponds to a massless particle, called a Goldstone boson.\footnote{
+    The particles are bosons due to the bosonic nature of the transformations, $g$. If the generators are Grassmann numbers, the resulting particles, called goldstinos, are fermions.
+    }
+This means there are $n_G = \dim G -\dim H$ zero-mass modes.
+In general, the counting of massless modes is complicated and depends on the dispersion relation of the particles at low momenta.
+Systems with Goldstone bosons with quadratic dispersion relation, that is $E \propto |\vec p|^2$ when $\vec p \rightarrow 0$, often exhibit a lower number of massless modes.
+An example is ferromagnetic, where the $\mathrm{SU}(2)$ rotational symmetry is broken down to $\mathrm{U}(1)$ when they align along one axis. 
+This corresponds to two broken generators, yet the system exhibits only one massless mode~\autocite{braunerSpontaneousSymmetryBreaking2010}.
+
+\begin{figure}[ht]
+    \centering
+    \hspace*{2.5cm}
+    \includegraphics[width=.6\linewidth]{figurer/mexican_hat_zoom.pdf}
+    \caption{Excitations along the brim does not cost any energy, as the potential is flat, unlike excitations in the radial direction.}
+    \label{fig: Mexican hat zoom}
+\end{figure}
+
+The linear sigma model gives an intuition for the Goldstone mode.
+In the case of $N = 2$, the symmetry of the Lagrangian are rotations in the plane.
+As the ground state is a point along the ``brim'' of the hat, this rotational symmetry is broken.
+However, any excitations in the angular direction do not cost any energy, which is indicative of a massless mode.
+This is illustrated in \autoref{fig: Mexican hat zoom}.
+In this example, the original symmetry group is one-dimensional, so there are no unbroken symmetries.
+Consider instead the $N=3$ linear sigma model, which has the three-dimensional symmetry group $\SO(3)$, rotations of the sphere.
+We see that the ground state is left invariant under a subgroup of the original symmetry transformations.
+The ground state manifold of this system, the set of all states that minimizes the effective potential, is then a sphere.
+When the system chooses one single ground state, this symmetry is broken, but only for two of the generators. 
+The generator for rotations around the ground state leaves that point unchanged and is thus an unbroken symmetry.
+Any excitations in the direction of the broken symmetries do not cost energy, as it is in the ground state manifold.
+On the other hand, the unbroken symmetry does not correspond to an excitation.
+This is illustrated in \autoref{fig: ground state manifold}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.35\linewidth]{figurer/SU(3).pdf}
+    \caption{Excitations for the $N=3$ sigma model. Two of the symmetries are broken, while rotations around the ground state leaves the system unchanged.}
+    \label{fig: ground state manifold}
+\end{figure}
+
+
+
+
+\subsection{Schwinger-Dyson equations and Ward identities}
+\label{subsection: ward identities}
+
+
+Given a system of fields $\varphi_a$ governed by some action $S[\varphi]$, the expectation value of a functional of the fields, $F[ \varphi]$, is given by 
+%
+\begin{equation}
+    \label{Most general schwinger dyson equation}
+    \Braket{ F[\varphi] } = \int \D \varphi \, e^{iS[\varphi]} F[\varphi].
+\end{equation}
+%
+If we perform a \emph{local} transformation of the field on the form $\varphi(x) \rightarrow \varphi(x) + \epsilon \eta(x)$, the integral measure will remain unchanged.
+The expectation value, to first order in $\epsilon$, then changes as
+%
+\begin{equation}
+    \Braket{F} \rightarrow
+    \int \D \varphi \, e^{i(S+\epsilon \delta S)}(F + \epsilon \delta F)
+    = \Braket{F} +  \epsilon\Braket{i(\delta_\eta S) F} + \epsilon\Braket{\delta_\eta F}.
+\end{equation}
+%
+The variation $\delta_\eta$ is related to the functional dervative through $\delta_\eta S = \int \dd^n x\, \fdv{S[\varphi]}{\varphi(x)} \eta(x)$, as defined in \autoref{appendix: Functional derivatives}.
+As this amounts to a change of integration variable, the expectation value should remain unchanged.
+This gives us the important identity
+%
+\begin{equation}
+    \Braket{i (\delta_\eta S[\varphi]) F[\varphi]} + \Braket{\delta_\eta F[\varphi]} = 0.
+\end{equation}
+%
+Inserting the integral form of the variation, and using the fact that $\eta$ is independent of $\varphi$, we may write this identity as
+%
+\begin{equation}
+    \label{Generalized schwinger dyson equation}
+    \Braket{\fdv{S[\varphi]}{\varphi(x)} F[\varphi]} = i \Braket{\fdv{F[\varphi]}{\varphi(x)}}.
+\end{equation}
+%
+The Schwinger-Dyson equations are important special cases of this identity.
+They are the equations of motion of correlation functions.
+They thus incorporate the dynamics of a theory.
+We derive them by setting $F[\varphi] = \varphi(x_1)...\varphi(x_n)$.
+If we have a Lagrangian on the form $\Ell = - \frac{1}{2}\varphi(\partial^2 + m^2)\varphi - V[\varphi]$, then \autoref{Generalized schwinger dyson equation} becomes
+%
+\begin{align*}
+    (\partial^2_x + m^2)\braket{\varphi(x)\varphi(x_1)\dots \varphi(x_n)}
+    &= - \Braket{\V'[\varphi](x)\varphi(x_1)\dots\varphi(x_n)} \\
+    &\phantom{=} -i \sum_i\delta(x - x_i)
+    \Braket{\varphi(x_1)\dots  {\varphi(x_{i-1})}{\varphi(x_{i+1})} \dots \varphi(x_n)}.
+\end{align*}
+%
+% where the hat denotes that the field is \emph{omitted}.
+If $n = 1$ and $\V = 0$, we get the defining relation for the free Greens function,
+%
+\begin{equation}
+    (\partial^2_x + m^2)\braket{\varphi(x)\varphi(y)}
+    = -i \delta(x - y).
+\end{equation}
+%
+We may also consider slightly more general transformations of $\varphi(x)$, such as local phase-transformations $\varphi(x) \rightarrow e^{i\epsilon(x)}\varphi(x)$, as long as they do not affect the measure of the path integral.
+We will use this to derive identities related to the Schwinger-Dyson equations that incorporate the symmetries of a given theory.
+If $\varphi(x) \rightarrow \varphi(x) + \delta \varphi(x)$ is a global symmetry transformation, so that $\delta \Ell = \partial_\mu K^\mu$ and the integration measure is unchanged, then $\varphi(x) \rightarrow \varphi(x) + \eta(x) \delta \varphi(x)$ is a corresponding local transformation.
+We recover the global transformation for $\eta = 1$.
+The variation of the action from this transformation will be
+%
+\begin{align}
+    \nonumber
+    \delta S 
+    &= 
+    \int \dd^4 x \,
+    \left(
+        \pdv{\Ell}{\varphi} \eta \delta \varphi
+        + \pdv{\Ell}{(\partial_\mu\varphi) } \partial_\mu (\eta \delta \varphi)
+    \right)\\
+    \nonumber
+    & =
+    \int \dd^4 x \, \left( \pdv{\Ell}{(\partial_\mu \varphi)} \delta \varphi \right) \partial_\mu \eta
+    + \int \dd^4 x \, \eta(x)
+    \left( 
+        \pdv{\Ell}{\varphi} \delta \varphi 
+        + \pdv{\Ell}{(\partial_\mu \varphi)} \partial_\mu \delta \varphi  
+    \right)\\
+    \nonumber
+    &=
+    - \int \dd^4 x \, \eta(x) \partial_\mu 
+    \left(  \pdv{\Ell}{(\partial_\mu \varphi)} \delta \varphi - K^\mu \right).
+\end{align}
+%
+In the last line, we integrated by parts, and used $\delta \Ell = \partial_\mu K^\mu$.
+From \autoref{subsection: nothers theorem}, we recognize the term within the parenthesis as precisely the Nöther current $J^\mu$, so
+%
+\begin{equation}
+    \label{delta S} 
+    \delta S = - \int \dd^4 x \, \eta(x) \partial_\mu J^\mu.
+\end{equation}
+%
+As $\varphi$ is an integration variable in the path integral, it is not necessarily on-shell.
+We can therefore not use Nöther's theorem, $\partial_\mu J^\mu = 0$, as this relies on the equation of motion.
+However, for $F = 1$ and thus $\delta F = 0$, we can insert \autoref{delta S} into \autoref{Most general schwinger dyson equation} to obtain the quantum version of the current conservation equation of Nöther's theorem, \autoref{Nothers theorem},
+%
+\begin{equation}
+    \partial_\mu \Braket{J^\mu} = 0.
+\end{equation}
+%
+With $F = \varphi(x_1) \varphi(x_2)$, we get~\autocite{schwartzQuantumFieldTheory2013,peskinIntroductionQuantumField1995}
+%
+\begin{equation}
+    \partial_{x, \mu} \braket{J^\mu (x)\varphi(x_1) \varphi(x_2)}
+    = -i \delta(x - x_1) \braket{\delta \varphi(x_1) \varphi(x_2)}
+    - i \delta(x - x_2) \braket{\varphi(x_1) \delta \varphi(x_2)}.
+\end{equation}
+%
+Identities of this form are called Ward-Takashi identities, often just Ward-identities, and encode the symmetries of a theory.
+In case symmetry is only approximate, so $\delta \Ell = \partial_\mu K^\mu + \Delta$, where $\Delta$ is some small symmetry breaking operator, or it is subject to an anomaly, so $\D \varphi \rightarrow \D \varphi (1 + \Delta)$, then the conservation equation is modified to
+%
+\begin{equation}
+    \partial_\mu \Braket{J^\mu} = \Braket{\Delta}.
+\end{equation}
+
+To create the generating functional, we must add external currents $j$.
+However, these new terms in the Lagrangian might break the invariance under a symmetry transformation $\varphi \rightarrow \varphi'$.
+If we transform the external currents as $j \rightarrow j'$ to counteract the transformation of the fields, then the theory should remain invariant.
+As before, we make both these transformations local, making sure that they leave the measure invariant.
+We can then perform a change of variable in the path integral, which relates generating functionals with different external currents, $Z[j] = Z[j']$.
+This relation must not only be obeyed by the underlying theory but also by any effective theory, which significantly constrains the form of the effective Lagrangian.
+As an illustration, we consider an example of spinor fields adapted from~\autocite{schererIntroductionChiralPerturbation2002}, as this is closely related to the construction of chiral perturbation theory.
+Spinors and gauge theory, which are relevant for this example, are discussed in more depth in \autoref{chapter: chpt}.
+Consider a massless spinor field with the Lagrangian,
+%
+\begin{equation}
+    \Ell = i \bar \psi \slashed \partial \psi - \V[\psi, \bar \psi].
+\end{equation}
+%
+Assume this theory has a global $\Lie{SU}{N}$ symmetry, so the $\V$ remains unchanged under the transformation $\psi \rightarrow U \psi$, $\bar \psi \rightarrow \bar \psi U^\dagger$.
+The system then has a corresponding conserved current,
+%
+\begin{equation}
+    J_\alpha^\mu = \bar \psi T_\alpha \gamma^\mu \psi,
+\end{equation}
+%
+where $T_\alpha$ are the generators of $\Lie{SU}{N}$.
+We then include spinor sources $\eta = \eta_\alpha T_\alpha$ and vector sources $v_\mu = v_\mu^\alpha T_\alpha$ by adding the terms $ \bar \eta \psi$, $\bar \psi \eta$, and $v_\mu^\alpha J^\mu_\alpha$ to the Lagrangian.
+Under a local $\Lie{SU}{N}$ transformation, $\psi \rightarrow e^{i\theta_\alpha(x)T_\alpha} \psi$, the action changes as
+%
+\begin{equation}
+    S \rightarrow 
+    \int \dd^4 x \,
+    \left[
+        i \bar \psi \slashed \partial \psi 
+        - \V[\psi, \bar \psi]
+        + \bar \eta U \psi
+        + \bar \psi U^\dagger \eta 
+        + \bar \psi \gamma^\mu (U^\dagger v_\mu U + i U^\dagger \partial_\mu U)\psi
+    \right].
+\end{equation}
+%
+The last term corresponds to the change in action without sources, which we found earlier \autoref{delta S}.
+We then define transformations of the external fields to counteract the transformation of $\psi$.
+As these transformations are local, the sources now act as gauge fields.
+The gauge transformation of the external sources are
+%
+\begin{equation}
+    \eta \rightarrow U \eta, \quad
+    \bar \eta \rightarrow \bar \eta U^\dagger,\quad
+    v_\mu \rightarrow U(v_\mu + i \partial_\mu) U^\dagger.
+\end{equation}
+%
+This gives the relation
+$
+    S[\psi', \bar \psi', \eta', \bar \eta', v'] =
+    S[\psi, \bar \psi, \eta, \bar \eta, v],
+$
+where the prime indicates gauge transformed fields.
+As we argued in the subsection on the Dyson-Schwinger equations, we can change the integration variables inside the path integral without changing the result.
+Considering an infinitesimal transformation, and expanding to first order in $\theta$, we get
+%
+\begin{align}
+    \nonumber
+    0 &= Z[\eta', \bar \eta', v'] - Z[\eta, \bar \eta, v]\\
+    \label{local invariance with external fields as gauge fields}
+    &=
+    i \int \dd^4 x 
+    \Braket{
+        i \theta_\alpha(x) \bar \psi T_\alpha \eta
+        - i \theta_\alpha(x) \bar \eta T_\alpha \psi
+        + i \bar \psi \gamma^\mu 
+        (
+            i\theta_\alpha(x) [T_\alpha, v_\mu] - i \partial_\mu \theta_\alpha(x) T_\alpha
+        ) \psi
+    }
+\end{align}
+%
+As the transformation, and thus $\theta_\alpha$, is arbitrary, the integrand must vanish.
+After partial integration, we are left with
+%
+\begin{equation}
+    \Braket{
+        \bar \psi T_\alpha \eta
+        - \bar \eta T_\alpha \psi
+        + D^{\alpha\beta}_\mu J^\mu_\beta
+    }
+    = 0.
+\end{equation}
+%
+Here, $D^{\alpha\beta}_\mu$ is the covariant derivative in the adjoint representation,
+$D^{\alpha\beta}_\mu J^\beta_\nu = (\delta_{\alpha\beta}\partial_\mu + i v_\mu^\gamma f^{\alpha \gamma \beta} )J^\nu_\beta $, and $f^{\alpha \beta \gamma}$ are the structure constants of $\lie{su}{N}$.
+We can get a more general expression by writing this using the generating functional $W$,
+%
+\begin{equation}
+    \label{generating equation ward identitites}
+    \left( 
+        \fdv{}{\eta_\alpha(x)} \eta - \bar \eta \fdv{}{\bar \eta_\alpha(x)}  
+        + D_{\mu}^{\alpha \beta} \fdv{}{v_\mu^\beta(x)}
+        \right) W[\eta, \bar \eta, v] = 0.
+\end{equation}
+%
+If we evaluate this at $\eta = \bar \eta = v_\mu = 0$, we get the quantum conservation equation $\partial_\mu \Braket{J^\mu_\alpha} = 0$.
+From \autoref{generating equation ward identitites}, we can also get more general Ward identities by taking functional derivatives with respect to the external sources.
+
+

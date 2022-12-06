@@ -1,0 +1,49 @@
+\documentclass[10pt, a4paper]{article}
+
+
+\input{packages.tex}
+\input{newcommands.tex}
+
+\bibliography{ref.bib}
+
+
+\title{Notes}
+\author{Martin Kj{\o}llesdal Johnsrud}
+
+
+\begin{document}
+
+    \maketitle
+    \clearpage
+
+    \tableofcontents
+    \clearpage
+
+    \listoftodos
+    \clearpage
+
+
+    % space instead of indentation for paragraphs 
+    \setlength{\parindent}{0em}
+    \setlength{\parskip}{0.8em}
+
+
+    \input{math/diff_geom.tex}
+    \input{math/Lie-theory.tex}
+
+    \input{classical_field_theory/classical_field_theory.tex}
+    \input{GR/GR.tex}
+
+    \input{QFT/path_integral.tex}
+    \input{QFT/effective_action.tex}
+    \input{QFT/goldstones_theorem.tex}
+    \input{QFT/CCWZ_construction.tex}
+
+    \input{QM/QM.tex}
+
+    
+
+    \printbibliography
+
+
+\end{document}

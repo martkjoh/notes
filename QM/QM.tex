@@ -1,0 +1,324 @@
+\section{Quentum Mechanics}
+
+
+Finding solutions to problems in quantum mechanics ultimatley comes down to solving the Schrødinger equation
+\begin{equation*}
+    \hat H \ket{\Psi, t} = i \hbar \odv{}{t} \ket{\Psi, t}.
+\end{equation*}
+The most straight forward way to do this is to project it down to a basis, like position $q$ or momentum $p$. The Schrødinger equation then might become a partial differential equation, which as we all know can be nasty things. However, there is an more abstract algebraic way of working with the equation in a basis independent form, which relies on a few basic assumption about the operators. The main only assumption going in is the commutation relation between the operators, like
+\begin{equation*}
+[q, p] = i \hbar,\,\, [L_i, L_j] = i \hbar \epsilon_{ijk} L_k, \quad \mathrm{where} \,\, [A, B] = AB - BA
+\end{equation*}
+These operators might be represented as variables, matrices or differential operators, but here, this is the \emph{only} information about them we use. This means that as soon as you find something that behaves like this, everything derived here comes for free. We can then extract a lot of information about the system, without having to solve differential equations, or do a single integral. To remove clutter, this text sets $\hbar = c = 1$.
+
+
+
+
+\subsection{Harmonic oscillator}
+
+The hamiltonian for a harmonic oscillator is
+\begin{equation*}
+    \hat H = \frac{1}{2 m} p^2 + \frac{1}{2}m \omega^2 q^2 = \frac{1}{2} \omega \left( m \omega q^2 + \frac{p^2}{m \omega} \right)
+\end{equation*}
+This leads to very natural versions of the position and momentum operators, and their fundamental commutation relation
+\begin{equation}
+    \label{position and momentu operators}
+    q' := \sqrt{m \omega} \, q, \quad p' := \frac{p}{\sqrt{\omega m}}, \implies [q', p'] = i 
+\end{equation}
+
+\subsubsection*{Creation operators}
+We can then take this new hamiltonian and factor it, utilizing the commutation-relation,
+\begin{equation*}
+    \hat H' = \frac{1}{2} \omega (q'^2 + p'^2) = \frac{1}{2} \omega (q' - ip')(q' + ip') - \frac{i}{2} \omega [q', p']
+\end{equation*}
+This leads us to the introduction of the anhelation and creation operators, resp.
+\begin{equation}
+    \label{creation operators}
+    a := \frac{1}{\sqrt{2}}(q' + ip'), \, a^\dagger := \frac{1}{\sqrt{2}}(q' - ip') \implies H' = aa^\dagger + \frac{1}{2}.
+\end{equation}
+The commutation relation is
+\begin{align}
+    \nonumber[a, a^\dagger] = \frac{1}{2}(q' + ip')(q' - ip') - &\frac{1}{2}(q' - ip')(q' + ip') = -\frac{i}{2}[q', p'] -\frac{i}{2}[q', p'] \\
+    \implies &[a, a^\dagger] = 1
+    \label{commutation relation creation operators}
+\end{align}
+and we can find the reverse relation
+\begin{equation*}
+    q' = \frac{1}{\sqrt{2}}(a + a^\dagger), \quad p' = \frac{-i}{\sqrt{2}}(a - a^\dagger).
+\end{equation*}
+The last tool we need is the number operator, $\hat N := a^\dagger a $. This means $\hat H = \hat N + 1/2$ and these operators share commutation relations,
+\begin{align}
+    \label{commutation relation Hamiltonian and creation operator}
+    [\hat H', a] = [\hat N, a] = a^\dagger a a - a a^\dagger a = [a^\dagger, a]a = -a, \\ \nonumber
+    [\hat H', a^\dagger] = [\hat N, a^\dagger] = a^\dagger a a^\dagger - a^\dagger a^\dagger a = a^\dagger[a, a^\dagger] = a^\dagger.
+\end{align}
+
+\subsubsection*{Eigenvalues}
+Assume $\ket{\psi}$ is an eigenvector of $\hat H'$, so $\hat H' \ket{\psi} = \lambda \ket{\psi}$ .
+We can exploit the commutators of the hamiltonian and the $a$ operators to create new eigenvectors.
+\begin{align*}
+    \hat H'(a\ket{\psi}) = a(\hat H' + [\hat H', a])\ket{\psi} = (\lambda - 1)(a\ket{\psi}) \\ 
+    \hat H'(a^\dagger\ket{\psi}) = a^\dagger(\hat H' + [\hat H', a^\dagger])\ket{\psi} = (\lambda + 1)(a^\dagger \ket{\psi})
+\end{align*}
+This seem to create an infinite chain of eigenvalues and vectors in both directions. However, there must be a bottom, as
+\begin{equation*}
+    0 \leq \| a\ket{\psi} \|^2 = \bra{\psi}a^\dagger a \ket{\psi} = \lambda - 1/2 \implies \lambda \geq 1/2.
+\end{equation*} 
+This holds true for all eigenvalues of $\hat H'$. For both of these statements to be true, there must be a vector $\ket{0}$ such that $a \ket{0} = 0$, which can be reach from \emph{any} eigenvector of $\hat H'$ through repeated application of $a$, and thus all eigenvectors can be reached from application of $a^\dagger$. \footnote{This is at least true for eigenvalues, but can there be parallel chains of eigenvectors?} The eigenvalue for the ground state, $E'_0$, is
+\begin{equation*}
+    \hat H' \ket{0} = (a^\dagger a + \frac{1}{2}) \ket{0} = \frac{1}{2} \ket{0} \implies E'_0 = \frac{1}{2}.
+\end{equation*}
+The next eigenvalues up the chain is then given by:
+\begin{equation}
+    \label{eigenvalues harmonic oscillator}
+    \hat H' [(a^\dagger)^n \ket{0}] = (E_0 + n)[(a^\dagger)^n \ket{0}]:= E_n [(a^\dagger)^n \ket{0}], \quad E_n = n + \frac{1}{2}.
+\end{equation}
+
+\subsubsection*{Eigenvectors}
+If we apply the $\hat N = \hat H' - 1/2$ operator to one of these new eigenvectors, we get the number of times $a^\dagger$ has been applied to get to it, 
+\begin{equation*}
+    \hat N (a^\dagger )^{n} \ket 0 = n (a^\dagger )^{n} \ket 0 
+\end{equation*}
+We assume $\ket 0$ is normalized, and  let $\ket{n}$ be the n'th eigenvector in the chain. Therefore $a^\dagger \ket{n} = c_n \ket{n+1} ,\, a\ket{n} = c'_n \ket{n-1}$ for some constants $c_n, \, c_n'$, and 
+\begin{equation*}
+    \bra{n}aa^\dagger\ket{n} = \bra{n}\hat N + 1\ket{n} =  \bra{n+1}c_n^*c_n\ket{n+1} = |c_n|^2 = n + 1, \quad |c_n'|^2=n  
+\end{equation*}
+Choosing real and positive values for the constants, we get
+\begin{equation}
+    \label{eigenvectors harmonic oscillator}
+    a^\dagger \ket n = \sqrt{n + 1} \ket{n}, \, a \ket n = \sqrt{n} \ket{n-1}, \quad \ket n = \frac{1}{\sqrt{n!}} \ket 0.
+\end{equation}
+
+\subsubsection*{Expectationvalues}
+The expectation value of any odd power of $q', p'$ will be zero, as it can be written as a sum of odd combinations $a, a^\dagger$, and we will then end up with a inner product of the form $\bra{m}\ket{n}, m \neq n$. Thus,
+\begin{equation}
+    \label{even escpectationvalues harmonic oscillator}
+    \E{q^{2n+1}} = \E{p^{2n+1}} = 0.
+\end{equation}
+Even numbers, however, can give nonzero answers. For example
+\begin{equation}
+    \label{squared expectation values harmonic oscillator}
+    \E{q'^2} = \frac{1}{\sqrt 2}\bra{n}(a + a^\dagger)^2\ket{n} = \frac{1}{\sqrt 2}\bra{n}a^\dagger a + a a^\dagger \ket{n} = \frac{\sqrt n + \sqrt{n - 1}}{\sqrt 2}, \quad \E{p'^2} = \frac{ - \sqrt n + \sqrt{n - 1}}{\sqrt 2}
+\end{equation}
+
+\subsubsection*{Coherent states}
+Assume $\ket \alpha$ is the eigenvector of $a$, i.e. $a \ket \alpha = \alpha \ket \alpha$. Then we can expand it in terms of the energy eigenvectors,
+\begin{equation*}
+    \ket \alpha = \sum_n c_n \ket n.
+\end{equation*}
+Using what we have found for the lowering operator,
+\begin{equation*}
+    a \ket \alpha = a\sum_n c_n \ket n = \sum_n c_n \sqrt n \ket{n-1} = \alpha \sum_n c_n \ket n 
+\end{equation*}
+This means we can get a recursion relation for $c_n$, $c_{n+1} = \alpha {c_n}/{\sqrt{n + 1}}$, which explicitly evaluates to $c_n = \alpha^n {c_0}/{\sqrt{n!}}$. If we enforce $\braket{\alpha} = 1$, then we get
+\begin{equation}
+    \ket \alpha = e^{-|\alpha|^2/2}\sum_n \frac{\alpha^n}{\sqrt{n!}}\ket n.
+\end{equation}
+In the Heisenberg picture, the time dependence of the operators is given by
+\begin{equation*}
+    \odv{}{t} a(t) = i[\hat H, a(t)] = -ia(t) \implies a(t) = a e^{-it}, \quad a^\dagger(t) = a^\dagger e^{it}
+\end{equation*}
+The time dependent expectation value of the coherent state is thus
+\begin{equation*}
+    \bra{\alpha}a(t)\ket{\alpha} = \alpha e^{-it}, \quad \bra{\alpha}a^\dagger(t)\ket{\alpha} = \alpha^* e^{it},
+\end{equation*}
+and the position/momentum expectationvalues are
+\begin{equation*}
+    \E{q(t)}_\alpha = \sqrt{2} |\alpha| \cos(t - \arg(\alpha)), \quad \E{p(t)}_\alpha = -\sqrt{2} |\alpha| \sin(t - \arg(\alpha ))
+\end{equation*}
+
+\subsubsection*{Position representation}
+The rule for finding the position-representation of a operator $\hat F(\hat x, \hat p)$ is
+\begin{equation*}
+    \bra{x}\hat F(\hat x, \hat p)\ket{\psi} = \hat F\left(x, -i \pdv{}{x}\right) \braket{x|\psi},
+\end{equation*}
+where $\braket{x | \psi} := \psi(x)$ is the wave function of the system. This means we can get a differential equation for the wavefunction, if we have an operator equation, which we do: $a \ket 0 = 0$. The ground state wave function is therefore given by
+\begin{equation*}
+    a \ket 0 = 0 \implies \left(x + \pdv{}{x}\right)\psi_0 = 0 \implies \psi_0(x) = C \exp(-x^2/2).
+\end{equation*}
+The exited states are given by
+\begin{equation*}
+    \psi_n(x) = \left(x - \pdv{}{x}\right)^n \psi_0(n).
+\end{equation*}
+
+\subsection{Field of harmonic oscillators}
+Consider the quantized photon field, or EM vectorpotential, in a square box with side lengths $L$, volume $V = L^3$ and periodic boundary conditions. The field can be split up into modes with different wave vectors $k$ with polarization vectors $\epsilon_{k\lambda}$. They are given by
+\begin{equation*}
+    k = \frac{2 \pi n_i}{L}  \hat e_i, \quad \epsilon_{k\lambda} \cdot k = 0, \quad i \in \{1, 2, 3\}, \, \lambda \in \{1, 2\}.
+\end{equation*}
+Let 
+\begin{equation*}
+    S = \{(k_1\lambda_1), (k_2\lambda_2), ...\}
+\end{equation*} 
+be the set of all unique modes. The Hamiltonian for a free EM field is then        \begin{equation*}
+    H = \sum_{j \in S} \omega_{j}\left( a^\dagger_{j}a_{j} + \frac{1}{2}\right),
+\end{equation*}
+where $\omega_{k\lambda} = k$ ($c=1$, remember) is the frequency of the mode $j = (k\lambda)$. The sum is over the wave vectors $k$ and polarizations $\lambda$ corresponding to a polarization vector $\epsilon_{k\lambda}$. The $a$'s here are operators, just as in the case of the single oscillator case, however it is one for each mode/polarization. In reality, there is a lot of suppressed tensor products here. Writing the operators out, they are
+\begin{equation}
+    a_{k\lambda} = 1_{k_1 \lambda_1}\otimes 1_{k_2 \lambda_2}\otimes ... \otimes a_{k, \lambda} \otimes ...
+\end{equation}
+These operators obey the commutation relation
+\begin{equation*}
+    [a_i, a^\dagger_j] = \delta_{ij},
+\end{equation*}
+which means we get everything from the single harmonic oscillator for free. Even though we started with the creation operators, we can still define the canonical operators
+\begin{equation*}
+    q_j = \sqrt{\frac{1}{2 \omega_j}}\left(a_j + a^\dagger_j\right), \, p_j = \sqrt{\frac{\omega_j}{2}}\left(a_j + a^\dagger_j\right), \quad [q_i, p_j] = i\delta_{ij}
+\end{equation*}
+Notice that we can't get away with removing the $\omega$'s this time, as there are different frequencies for each oscillator. We can again define a number operator $N_j =  a^\dagger_j a_j$. Then, the energy eigenvalues are of the form
+\begin{equation*}
+    \ket F = \bigotimes_{j \in S} \ket{n_j} = \ket{n_{k_1\lambda_1}, n_{k_1\lambda_1}, ...},  \quad H \ket \psi = (E_0 + \sum_{j \in S}\omega_{j} n_{j}) \ket \psi,
+\end{equation*}
+where $E_0 = \sum_{j\in A} \omega_j / 2$ is the (very infinite) ground state energy. This, however, is not a worry, as it is a constant. Let $\ket 0 = \ket{0, 0, ...}$ be the ground state of the system. The different states are then built up by applying the raising operators. If we assume there is a highest exited state $N$ (anything else would require an infinite amount of energy), then the state is characterized by the number of photons in each state, $F = (n_1, n_2, ... n_N)$. The state is then
+\begin{equation*}
+    \ket F = \ket{n_1, n_2, ... n_N, 0, 0, ...} = \bigotimes_{n_j \in F} \frac{(a_j^\dagger)^{n_j}}{\sqrt{n_j!}} \ket 0.
+\end{equation*}
+
+\subsubsection*{Position representation}
+We now have a wave function for each mode.  To find the position representation of the system, we need to know the position eigenvector. However, now we have one position operator for each mode, so the different eigenvectors are
+\begin{equation*}
+    \hat q_j \ket{q_j} = \ket{\psi_1} \otimes \ket{\psi_2} \otimes ... \left( \hat q_j \ket{q_j} \right) \otimes ... = \ket{\psi_1} \otimes \ket{\psi_2} ... \otimes \left(q_j \ket q  \right) \otimes ... = q_j \ket{q_j}
+\end{equation*}
+as the operator applies only to he corresponding mode. We can then construct the position operator for \emph{all} modes/photons, $\hat x = \bigotimes_{j\in S} q_j$, with the corresponding eigenvectors $\ket x$:
+\begin{equation*}
+    \hat x \ket x = \bigotimes_{j\in S} \hat q_j \ket{q_j} = \left(\prod_{j\in S} q_j\right) \ket x.
+\end{equation*}
+What does this mean? I have no idea...
+
+\subsubsection*{Field operators and coherent states}
+The field strength at a position $x$ in the box is given by the field operator
+\begin{equation}
+    \hat A(x) = \sum_{j \in S} \frac{\epsilon_j}{\sqrt {2k_jV}} \left(a_j e^{ik_j\cdot x} + a^\dagger_je^{-ik_j\cdot x}\right).
+\end{equation}
+We can then make coherent states, as in the one oscillator case:
+\begin{equation*}
+    \ket{\alpha_j} = e^{-|\alpha_j|^2/2}\sum_{n_j} \frac{\alpha_j}{\sqrt{n_j !}} \ket{0, 0, ... n_j, 0, ...}.
+\end{equation*}
+As we have time dependence again given by
+\begin{equation*}
+    \odv{t} a_j(t) = i[H, a_j(t)] = -i\omega_j a_j(t) \implies a_j(t) = a_je^{-i\omega_j t}, \, a_j^\dagger(t) = a_j^\dagger e^{i\omega_j t},
+\end{equation*}
+we get
+\begin{equation*}
+    A(x, t) := \bra{\alpha_j} \hat A(x, t) \ket{\alpha_j} = \epsilon_j \frac{\sqrt 2 |\alpha_j|}{\sqrt{k_j V}} \cos(k_j\cdot x - \omega_j t - \arg(\alpha)).
+\end{equation*}
+The classical electromagnetic linearly polarized plane waves are not photon-states, but rather coherent states, superpositions of different photon states. In fact, as $\ket{F}$ is not an eigenvector of $\hat A(x)$, the photon state does not have a definite, well define field-strength anywhere, in the same way a electron with a well defined momentum does not have a well defined position.
+
+\subsection{Angular momentum}
+Angular momentum operators, in units of $\hbar$, are 3-dimensional vectors
+\begin{equation*}
+    J = \sum_{i=1}^3 J_i e_i, \quad J^2 = J_1^2 + J_2^2 + J_3^2
+\end{equation*} defined by the commutation relation
+\begin{equation}
+    \label{commutatino relation angular momentum}
+    [J_i, J_j] = \sum_{k=1}^3i \epsilon_{ijk} J_k, \quad i,j,k \in \{1, 2, 3\}
+\end{equation}
+where $\epsilon_{ijk}$ is the Levi-Cevita symbol. None of the components commutate with each other, but they all commutate with the length squared, as
+\begin{align*}
+    [J^2, J_i] & = [J_j^2, J_i] + [J_k^2, J_i] = J_j[J_j, J_i] + [J_j, J_i]J_j + J_k[J_k, J_i] + [J_k, J_i]J_k \\ 
+    &= i(J_jJ_k + J_kJ_j) - i(J_jJ_k + J_kJ_j) = 0,
+\end{align*}
+where the indices are cyclic $\dots k \rightarrow i \rightarrow j \rightarrow k \rightarrow i \dots$. We then make a specific choice, picking out component $3$ as 'special', but this is completely arbitrary, and define the raising and lowering operators, analogous to the creation and anhelation operators \eqref{creation operators}, and find their commutation relation with $J_3$
+\begin{equation}
+    \label{angular momentum creation operators}
+    J_\pm = J_1 \pm i J_2, \quad [J_3, J_\pm] = \pm J_\pm.
+\end{equation}
+Notice the similarities with the commutation relation \eqref{commutation relation Hamiltonian and creation operator}. As the operators $J^2, J_ z$ commute, so they have a common set of eigenvectors. \footnote{This should probably be proved here somewhere...} Assume $\ket{\lambda, \mu}$ is an eigenvector of $ J_3$ so that $J_3 \ket{\lambda, \mu} = \mu \ket{\lambda, \mu}, \, J^2 \ket{\lambda, \mu} = \lambda(\lambda + 1) \ket{\lambda, \mu}$, we can get new eigenvectors by applying $J_\pm$, and get
+\begin{equation*}
+    J_3(J_\pm \ket{\lambda, \mu}) = (J_\pm J_3 + [J_3, J_\pm]) \ket{\lambda, \mu} = (\mu \pm 1)(J_\pm \ket{\lambda, \mu}), \implies J_\pm \ket{\lambda, \mu} = \ket{\lambda, \mu \pm 1}
+\end{equation*}
+To find relations for the length square operator, we should express it in terms of these other operators.
+\begin{equation*}
+    J_\pm J_\mp = J_1^2 + J_2^2 \pm [J_1, J_2] = J^2 - J_z^2 \pm J_3, \implies J^2 = J_\pm J_\mp + J_z^2 \mp J_z. 
+\end{equation*}
+Assuming $\braket{\lambda, \mu}{\lambda, \mu} = 1$, we know
+\begin{align*}
+    &|J_+ \ket{\lambda, \mu} |^2  
+    = \bra{\lambda, \mu} J_- J_+ \ket{\lambda, \mu} 
+    = \bra{\lambda, \mu} J^2 - J_z^2 - J_3 \ket{\lambda, \mu} 
+    = (\lambda(\lambda + 1)  - \mu(\mu + 1)) > 0 \\
+    &|J_- \ket{\lambda, \mu} |^2  
+    = \bra{\lambda, \mu} J_+ J_- \ket{\lambda, \mu} 
+    = \bra{\lambda, \mu} J^2 - J_z^2 + J_3 \ket{\lambda, \mu} 
+    = (\lambda(\lambda + 1)  - \mu(\mu - 1)) > 0.
+\end{align*}
+Again, we see that the only way to both have these kind of raising, lowering operators, and for the positivity condition to hold true, we must have $|\mu| \leq \lambda$, so there must be two values $\mu_-, \mu_+$ s.t. $J_\pm \ket{\lambda, \mu_pm} = 0$. Thus, as $\mu$, take integer steps, $\lambda$ must be integer, or half integer, and we get the conditions for the eigenvalues
+\begin{equation}
+    J^2 \ket{l, m} = l(l + 1), \, J_3 \ket{l, m} = m, \quad 2l \in Z,\, m \in \{-l, -l+1, ..., l\}.
+\end{equation}
+
+\subsubsection*{Combining angular momenta}
+Given two hilbert spaces $\He_1, \, \He_2$, we can create a composite system $\He= \He_1 \otimes \He_2$, which have vectors of the form $\ket v = \ket{v_1} \otimes \ket{v_2}$. We can also define operators on the new space. given operators on the old space $A_1, \, A_2$, we get a new operator which acts on vectors in the new space $A = A_1 \otimes A_2, \, A \ket v = (A_1 \ket{v_1})\otimes (A_2 \ket{v_2})$. Thus, if we have angular momentum operators acting on the old spaces, $J_1, \, J_2$,  which obey
+\begin{align*}
+    &[J_{1,i}, J_{1, j}] = i \epsilon_{ijk}J_{1, k}, \quad [J_{2, i}, J_{2, j}] = i \epsilon_{ijk}J_{1, k}, \\
+    &J_1^2 \ket{j_1, m_1} = j_1(j_1+1)\ket{j_1, m_1}, \, J_{1, 3} \ket{j_1, m_1} = m_1\ket{j_1, m_1}, \\
+    &J_2^2 \ket{j_2, m_2} = j_2(j_2+1)\ket{j_2, m_2}, \, J_{2, 3} \ket{j_2, m_2} = m_2\ket{j_2, m_2}, 
+\end{align*}
+we can create the total angular momentum operator
+\begin{equation*}
+    J = J_1 \otimes 1 + 1 \otimes J_2 = J_1 + J_2.
+\end{equation*}
+Notice that the tensor product is suppressed when the operator is tensored with the identity operator. The two original operators commute, as
+\begin{equation*}
+    [J_1, J_2] = [J_1\otimes1, 1\otimes J_2] = [J_1, 1]\otimes[1, J_2] = 0.
+\end{equation*}
+This also implies
+\begin{equation*}
+    [J_1^2, J_2^2] = 0.
+\end{equation*}Thus, the new operator is a angular momentum operator
+\begin{align}
+    &[J_i, J_j] = [J_{i, 1} + J_{i, 2}, J_{j, 1} + J_{j, 2}] \nonumber \\ 
+    =&[J_{i, 1}, J_{j, 1}] + [J_{i, 1}, J_{j, 2}]  + [J_{i, 2}, J_{j, 1}]  + [J_{i, 2}, J_{j, 2}] =  i \epsilon_{ijk}J_{1, k} + i \epsilon_{ijk}J_{2, k} \nonumber \\
+    \implies & [J_i, J_j] = i \epsilon_{ijk} J_k.
+\end{align}
+It thus also have creation operators as \eqref{angular momentum creation operators}. The square of the new operator can be expressed in terms of the old, as
+\begin{equation*}
+    J^2 = J \cdot J = (J_1 \otimes 1 + 1 \otimes J_2) \cdot (J_1 \otimes 1 + 1 \otimes J_2) = J_1^2 \otimes 1 + 1 \otimes J_2^2 + 2 (J_1 \otimes 1 \cdot 1 \otimes J_2).
+\end{equation*}
+To find the last terms, we must remember that the angular momentum operators are vectors. Using that $(A_1\otimes A_2)(B_1\otimes B_2) = A_1B_1 \otimes A_2B_2$ (this comes just from applying the operators in succession) we get
+\begin{align*}
+    & J_1\otimes 1 = (J_{1, i} \otimes 1) e_i, \quad  1 \otimes J_{2, i} = (J_{1, i} \otimes 1) e_i \\
+    & \implies J_1 \cdot J_2 = (J_1 \otimes 1) \cdot( 1\otimes J_2) =   \sum_i (J_{1, i} \otimes 1) (1\otimes J_{2, i} ) = \sum_i (J_{1, i} \otimes J_{2,i}) . 
+\end{align*}
+Using \eqref{angular momentum creation operators}, we can write
+\begin{align*}
+    &J_1 \cdot J_2 
+    = \left[\frac{1}{2}[(J_{1, +} + J_{1, -})e_1 - i(J_{1, +} - J_{1, -})e_2] J_{1, 3} + J_{1, 3}e_3 \right] \cdot 
+        \left[\frac{1}{2}[(J_{2, +} + J_{2, -})e_1 - i(J_{2, +} - J_{2, -})e_2] J_{2, 3} + J_{2, 3}e_3 \right] \\
+    &= J_{1,3}J_{2, 3} + \frac{1}{4} \bigg(J_{1, +}J_{2, +} + J_{1, -}J_{2, -} +  J_{1, +}J_{2, -} + J_{2, -}J_{2, +} 
+        - [(J_{1, +}J_{2, +} + J_{1, -}J_{2, -} - J_{1, +}J_{2, -} - J_{2, -}J_{2, +}]  \bigg) \\
+    &= J_{1,3}J_{2, 3} + \frac{1}{2}(J_{1, +}J_{2, -} + J_{1, -}J_{2, +})
+\end{align*}
+This means we can write
+\begin{equation*}
+    J^2 = J_1^2 + J_2^2 + 2J_{1, 3}J_{2, 3} + J_{1, +}J_{2, -} + J_{1, -}J_{2, +}.
+\end{equation*}
+We have two basis which span $\He$, the eigenvectors of the original operators, 
+\begin{equation*}
+    \ket{j_1, m_{1}} \otimes \ket{j_2, m_{}} = \ket{j_1, m_{1}; j_2, m_{2}},
+\end{equation*}
+and the eigenvectors of the new operator
+\begin{equation*}
+    J^2\ket{j, m} = j(j+1)\ket{j, m}, \quad J_3\ket{j, m} = m\ket{j, m}
+\end{equation*}
+What is the correspondence? The original basis is eigenvalues of $J_3$, as
+\begin{align*}
+    &J_3 \ket{j_1, m_{1}; j_2, m_{2}} = (J_{1, 3} \otimes 1+ 1 \otimes J_{2, 3})\ket{j_1, m_{1}} \otimes \ket{j_2, m_{2}} 
+    = (J_{1, 3}\ket{j_1, m_{1}} \otimes \ket{j_2, m_{2}} + \ket{j_1, m_{1}} \otimes J_{2, 3}\ket{j_2, m_{2}}) \\
+        &= m_1\ket{j_1, m_{1}} \otimes \ket{j_2, m_{2}} + m_2\ket{j_1, m_{1}} \otimes \ket{j_2, m_{2}} = (m_1 + m_2)\ket{j_1, m_{1}; j_2, m_{2}} 
+\end{align*}
+So, $m = m_1 + m_2$. However, this is a very degenerate basis. If we take the max value for second quantum number $m_{1+}=j_1, m_{2+}=j_2$, then the original vector is a new basis vector, as
+\begin{equation*}
+    J^2 \ket{j_1, m_{1+}; j_2, m_{2+}} = (J_1^2 + J_2^2 + 2J_{1, 3}J_{2, 3} + J_{1, +}J_{2, -} + J_{2, -}J_{2, +})\ket{j_1, m_{1+}; j_2, m_{2+}}.
+\end{equation*}
+We have 
+\begin{align*}
+    &J_{2, -}J_{2, +}\ket{j_1, m_{1+}; j_2, m_{2+}} = J_{1, +}J_{2, -}\ket{j_1, m_{1+}; j_2, m_{2+}} = 0, \\
+    & (J_1^2 + J_2^2 + 2J_{1, 3}J_{2, 3})\ket{j_1, m_{1+}; j_2, m_{2+}}  = (j_1(j_1+1) + j_2(j_2+1) + 2m_{1+}m_{2+})\ket{j_1, m_{1+}; j_2, m_{2+}}, \\
+    & j_1(j_1+1) + j_2(j_2+1) + 2m_{1+}m_{2+} = j_1(j_1+1) + j_2(j_2+1) + 2j_1j_2 = (j_1 + j_2)(j_1 + j_2 + 1),                              
+\end{align*}
+so
+\begin{equation*}
+    J^2 \ket{j_1, m_{1+}; j_2, m_{2+}} = (j_1 + j_2)(j_1 + j_2 + 1) \ket{j_1, m_{1+}; j_2, m_{2+}}
+\end{equation*}
+Thus, the max value of $j$ is $j_1 + j_2$.
